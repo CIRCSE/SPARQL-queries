@@ -1,0 +1,23 @@
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix powla: <http://purl.org/powla/powla.owl#>
+prefix lemma: <http://lila-erc.eu/data/id/lemma#>
+
+# Use the endpoint "lemmaBank" 
+# Retrieve the lemmas in the Lemma Bank with a specific Part-of-Speech (e.g., NOUN) and a suffix
+
+
+SELECT ?lemma_wr ?suffix_wr
+WHERE {
+  ?s lila:hasPOS lila:noun ;
+     lila:hasSuffix ?suffix ;
+     ontolex:writtenRep ?lemma_wr .
+  ?suffix rdfs:label ?suffix_wr
+}
+order by ?suffix_wr
+LIMIT 25
+
+
+

@@ -1,0 +1,15 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+
+# Use the endpoint "lemmaBank"
+# Count the lemmas with a specific Part-of-Speech (e.g., NOUN) and a specific gender (e.g., neuter)
+
+SELECT (count(?lemma) as ?neuter_lemmas)
+WHERE {
+   ?lemma  lila:hasPOS lila:noun ;
+           lila:hasGender lila:neuter 
+}
+#GROUP BY ?aff ?afflab ?type
+#ORDER BY DESC(?count)
+LIMIT 15

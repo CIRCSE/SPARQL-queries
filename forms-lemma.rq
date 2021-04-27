@@ -1,0 +1,18 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+# Use the endpoint "corpora"
+# Retrieve the occurrences of the forms of a specific lemma (e.g., "malus" <http://lila-erc.eu/data/id/lemma/111418>) in all the corpora linked to the LiLa Knowledge Base 
+
+SELECT ?token ?tokenLabel ?docTitle
+WHERE {
+  ?token <http://lila-erc.eu/ontologies/lila/hasLemma> <http://lila-erc.eu/data/id/lemma/111418> ;
+         rdfs:label ?tokenLabel ;
+         lilacorpora:hasCitStructure ?citLayer.
+  ?citLayer powla:hasDocument ?doc .
+  ?doc dc:title ?docTitle
+         
+} group by ?token ?tokenLabel ?docTitle
+order by ?docTitle ?tokenLabel 
