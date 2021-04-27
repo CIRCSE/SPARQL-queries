@@ -14,7 +14,7 @@ List of available queries (in alphabetical order):
 - lemmi-POS.rq: retrieves the lemmas in the lemmaBank with a specific Part-of-Speech (e.g., NOUN);
 - protoItalic-Monarchia.rq: retrieves all the lemmas with a Proto-Italic reconstructed form in the "Monarchia" of Dante Alighieri;
 - tokens.rq: given a lemma (e.g., "occido"), it retrieves all the tokens having that lemma in the works linked in the LiLa knowledge base;
-- UDante-affix.rq: given an affix (e.g., “in- (negative)”), finds all the lemmas with such affix in UDante and IT-TB;
+- UDante-affix.rq: given an affix (e.g., “in- (negative)”), it finds all the lemmas with such affix in UDante and IT-TB;
 - UDante-lexicalbase.rq: given a lexical base (e.g., "loquor"), it finds all the lemmas belonging to the same lexical base in Dante and IT-TB;
 - UDante-sentiment.rq: retrieves the list of lemmas with a specific polarity in UDante;
 - UDante-synset.rq: finds all the lemmas belonging to a specific synset in UDante and IT-TB;
