@@ -1,0 +1,15 @@
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+
+# Use the endpoint "lemmaBank"
+# Retrieve all the lemmas with a Greek etymology (and thus included in the "Index Graecorum Vocabulorum in Linguam Latinam")
+
+select (GROUP_CONCAT(DISTINCT ?wr ; separator=", ") as ?wrs) ?lemma where {
+  service <https://lila-erc.eu/sparql/lexicalResources/query> {
+    ?le a ontolex:LexicalEntry ;
+        ontolex:canonicalForm ?lemma .
+    <http://lila-erc.eu/data/lexicalResources/IGVLL/Lexicon> lime:entry ?le
+  }
+  ?lemma ontolex:writtenRep ?wr
+}group by ?lemma

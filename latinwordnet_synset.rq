@@ -1,0 +1,46 @@
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+PREFIX fn: <http://www.w3.org/2005/xpath-functions#>
+PREFIX ittb: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
+PREFIX lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix wn: <http://wordnet-rdf.princeton.edu/ontology#>
+
+# Use the endpoint "LexicalResources"
+# Retrieve all the lemmas belonging to a specific synset
+
+select ?lemma ?lab ?base ?syn where {
+  { values ?syn { <http://wordnet-rdf.princeton.edu/wn30/02587375-v> }
+    ?le ontolex:canonicalForm ?lemma ;
+        ontolex:evokes ?syn ; 
+        service <http://lila-erc.eu/sparql/lemmaBank> {
+    		?lemma rdfs:label ?lab ;
+    		lila:hasBase ?base .
+  		}
+   }
+  UNION
+  { ?le ontolex:canonicalForm ?lemma ;
+        ontolex:evokes ?syn .
+     <http://wordnet-rdf.princeton.edu/wn30/02587375-v> wn:hypernym ?syn .
+    service <http://lila-erc.eu/sparql/lemmaBank> {
+    		?lemma rdfs:label ?lab ;
+    		lila:hasBase ?base .
+  		}
+  }
+  UNION 
+  {?le ontolex:canonicalForm ?l ;
+        ontolex:evokes ?syn_syn .
+     <http://wordnet-rdf.princeton.edu/wn30/02587375-v> wn:hypernym ?syn_syn .
+    service <http://lila-erc.eu/sparql/lemmaBank> {
+    		?l lila:hasBase ?base .
+      		?lemma a lila:Lemma ;
+               lila:hasPOS lila:verb;
+               lila:hasBase ?base ;
+               rdfs:label ?lab .
+    }
+  }
+}   

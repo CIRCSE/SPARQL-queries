@@ -1,0 +1,33 @@
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix UDanteSynFunction: <http://lila-erc.eu/data/corpora/DanteSearch/id/UDsynFunction/>
+prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
+
+# Use the endpoint "corpora"
+# Given the lemma "loquor" gives all the lemmas that are annotated as nsubj in Dante and subj ITTB
+
+SELECT ?subLemmaLabel ?docTitle
+WHERE {
+  VALUES ?copora {<http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>}
+  VALUES ?synFunctions {UDanteSynFunction:nsubj ITTBSynFunction:Sb}
+  ?token rdf:type powla:Terminal;
+         lila:hasLemma <http://lila-erc.eu/data/id/lemma/110805> .
+  
+  ?rel rdf:type ?synFunctions;
+       lilacorpora:hasHead ?token ;
+       lilacorpora:hasDep ?subj .
+  ?subj lila:hasLemma ?subjLemma . 
+  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+  ?doc dc:title ?docTitle .
+  service <https://lila-erc.eu/sparql/lemmaBank/query> {
+    VALUES ?nounPos {lila:proper_noun lila:noun }
+  ?subjLemma lila:hasPOS ?nounPos .
+     ?subjLemma rdfs:label ?subLemmaLabel.
+  }
+  
+}group by ?subjLemma ?subLemmaLabel ?docTitle

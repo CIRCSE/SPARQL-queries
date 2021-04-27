@@ -1,0 +1,56 @@
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix wn: <http://wordnet-rdf.princeton.edu/ontology#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ittbSynFunc: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+# Use the endpoint "LexicalResources"
+# Find all the lemmas of the synset (to reign) http://wordnet-rdf.princeton.edu/wn30/02587375-v 
+
+SELECT ?lemma ?lemmaWrs ?docTitle
+WHERE {
+   VALUES ?documentSummaCG {<http://lila-erc.eu/data/corpora/ITTB/id/citationUnit/005.>} .
+  {
+   
+  SELECT ?lemma (GROUP_CONCAT (DISTINCT ?wr ; separator=", ") as ?lemmaWrs)
+    WHERE {
+        VALUES ?syn {<http://wordnet-rdf.princeton.edu/wn30/02587375-v>} .
+        {SELECT ?wnLemma ?syn 
+         WHERE {
+            {
+              ?le ontolex:evokes ?syn;
+                ontolex:canonicalForm ?wnLemma .
+            }
+            UNION{
+              ?syn wn:hypernym ?hyp .
+              ?le ontolex:evokes ?hyp;
+                ontolex:canonicalForm ?wnLemma .
+            }
+         }group by ?wnLemma ?syn
+        }
+        service <http://lila-erc.eu/sparql/lemmaBank> {
+          ?wnLemma lila:hasBase ?base .
+            ?lemma lila:hasBase ?base ; 
+                   lila:hasPOS lila:verb ;
+                   ontolex:writtenRep ?wr .
+        }
+
+
+    } group by ?lemma
+  }
+      service <http://lila-erc.eu/sparql/corpora> {
+    VALUES ?copora {<http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>}
+    ?token lila:hasLemma ?lemma;
+               rdfs:label ?tokenLabel.
+    ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+    ?doc dc:title ?docTitle .
+   
+  }
+ 
+    
+}group by ?lemma ?lemmaWrs ?docTitle

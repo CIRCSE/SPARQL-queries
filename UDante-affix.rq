@@ -1,0 +1,32 @@
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix UDanteSynFunction: <http://lila-erc.eu/data/corpora/DanteSearch/id/UDsynFunction/>
+prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
+
+# Use the endpoint "corpora"
+# Given an affix (e.g. “in- (negative)”), find all the occurrences of lammas with such affixin UDante and ITTB
+
+SELECT  ?samePrefixLemmaLabel ?docTitle
+WHERE {
+  VALUES ?copora {<http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>}
+  service <https://lila-erc.eu/sparql/lemmaBank/query> {
+  ?samePrefixLemma lila:hasPrefix <http://lila-erc.eu/data/id/prefix/20>  .
+                             
+  }
+  
+  
+  ?token rdf:type powla:Terminal;
+         lila:hasLemma ?samePrefixLemma .
+  ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+  ?doc dc:title ?docTitle .
+  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora ;
+  service <https://lila-erc.eu/sparql/lemmaBank/query> {
+     ?samePrefixLemma rdfs:label ?samePrefixLemmaLabel.
+  }
+  
+}group by ?samePrefixLemma ?samePrefixLemmaLabel ?docTitle
+order by ?samePrefixLemma ?docTitle

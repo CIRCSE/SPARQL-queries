@@ -1,0 +1,29 @@
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
+prefix powla: <http://purl.org/powla/powla.owl#>
+prefix corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+
+# Use the endpoint "corpora"
+# Retrieve all lemmas of the "Querolus sive Aulularia" corpus with a Greek etymology (and thus included in the "Index Graecorum Vocabulorum in Linguam Latinam")
+
+select (GROUP_CONCAT(DISTINCT ?wr ; separator=", ") as ?wrs) ?lemma where {
+  service <https://lila-erc.eu/sparql/lexicalResources/query> {
+    ?le a ontolex:LexicalEntry ;
+        ontolex:canonicalForm ?lemma .
+    <http://lila-erc.eu/data/lexicalResources/IGVLL/Lexicon> lime:entry ?le
+  }
+  service <https://lila-erc.eu/sparql/lemmaBank/query> {
+    ?lemma ontolex:writtenRep ?wr .
+    ?lemma <http://lila-erc.eu/ontologies/lila/hasSuffix> ?suf .
+    ?suf rdfs:label ?sufLabel .
+    VALUES ?sufLabel {"-or" "-ic"}
+  }
+  
+  ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/Querolus/id/citationUnit/QuerolussiveAulularia> .
+  ?tokenQuer <http://lila-erc.eu/ontologies/lila/hasLemma> ?lemma ;           
+  <http://lila-erc.eu/ontologies/lila_corpora/hasCitStructure> ?CitationLayer.
+
+}group by ?lemma
