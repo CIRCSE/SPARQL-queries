@@ -1,0 +1,17 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix lime: <http://www.w3.org/ns/lemon/lime#>
+prefix marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
+prefix powla: <http://purl.org/powla/powla.owl#>
+
+# Use the endpoint "corpora"
+# List all the corpora currently available in the LiLa Knowledge Base
+
+SELECT ?subject ?Textual_Resource_title
+WHERE {
+  ?subject ?predicate powla:Document ;
+            dc:title ?Textual_Resource_title
+}
