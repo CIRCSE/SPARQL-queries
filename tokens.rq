@@ -1,0 +1,25 @@
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX lilaCorpus: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# Use the endpoint "corpora"
+# Given a lemma (e.g., "occido"), retrieve all the tokens having that lemma in the works linked in the LiLa knowledge base
+
+SELECT ?tokenURI ?tokenLabel ?lemma ?label
+{
+  service <https://lila-erc.eu/sparql/lemmaBank/query> {
+      ?lemma ontolex:writtenRep "occido"
+  } 
+     ?tokenURI lila:hasLemma ?lemma ;
+          rdf:type powla:Terminal;
+          powla:hasStringValue ?tokenLabel .
+       ?tokenURI lilaCorpus:hasCitStructure ?citLayer .
+      ?citLayer powla:hasDocument ?doc .
+      ?doc dc:title ?label 
+}
+order by ?label
