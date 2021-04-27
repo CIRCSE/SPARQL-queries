@@ -1,5 +1,5 @@
 # SPARQL-queries
-Selection of SPARQL queries to be used in the LiLa endpoints: [https://lila-erc.eu/sparql/index.html[(https://lila-erc.eu/sparql/index.html).
+Selection of SPARQL queries to be used in the LiLa endpoints: [https://lila-erc.eu/sparql/index.html](https://lila-erc.eu/sparql/index.html).
 
 List of available queries:
 - etymology.rq: retrieve all lemmas with a Proto-Italic reconstructed form
