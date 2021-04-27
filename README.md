@@ -12,3 +12,4 @@ List of available queries:
 - UDante-synset.rq: find all the lemmas belonging to a specific synset in UDante and IT-TB
 - UDante-syntax.rq: given a specific lemma (e.g., "loquor"), retrieve all the lemmas that are annotated as nsubj in Dante and subj ITTB
 - protoItalic-Monarchia.rq: retrieve all the lemmas with a Proto-Italic reconstructed form in the "Monarchia" of Dante Alighieri
+- tokens.rq: given a lemma (e.g., "occido"), retrieve all the tokens having that lemma in the works linked in the LiLa knowledge base
