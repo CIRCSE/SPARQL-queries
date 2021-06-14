@@ -21,4 +21,6 @@ List of available queries (in alphabetical order):
 - UDante-lexicalbase.rq: given a lexical base (e.g., "loquor"), it finds all the lemmas belonging to the same lexical base in Dante and IT-TB;
 - UDante-sentiment.rq: retrieves the list of lemmas with a specific polarity in UDante;
 - UDante-synset.rq: finds all the lemmas belonging to a specific synset in UDante and IT-TB;
-- UDante-syntax.rq: given a specific lemma (e.g., "loquor"), it retrieves all the lemmas that are annotated as nsubj in Dante and subj ITTB.
+- UDante-syntax.rq: given a specific lemma (e.g., "loquor"), it retrieves all the lemmas that are annotated as nsubj in Dante and subj IT-TB;
+- sentiment-text.rq: performs lexicon-based sentiment analysis on each text of the Epistole by Dante Alighieri using LatinAffectus v2;
+- sentiment-paragraph.rq: performs lexicon-based sentiment analysis on each paragraph of the letters written by Dante Alighieri using LatinAffectus v2.
