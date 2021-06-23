@@ -7,7 +7,7 @@ List of available queries (in alphabetical order):
 - etymology.rq: retrieves all lemmas with a Proto-Italic reconstructed form;
 - form-lemma.rq: retrieves the occurrences of the forms of a specific lemma (e.g., "malus" [<http://lila-erc.eu/data/id/lemma/111418>](<http://lila-erc.eu/data/id/lemma/111418>)) in all the corpora linked to the LiLa Knowledge Base;
 - forms-DVE.rq: counts the occurrences of each form of the lemmas 'dico' and 'facio' in the work "De Vulgari Eloquentia" of Dante Alighieri;
-- greek-Aulularia.rq: retrieves all lemmas of the "Querolus sive Aulularia" corpus with a Greek etymology (and thus included in the "Index Graecorum Vocabulorum in Linguam Latinam");
+- greek-Aulularia.rq: retrieves all lemmas of the "Querolus sive Aulularia" corpus with a Greek etymology (and thus included in the "Index Graecorum Vocabulorum in Linguam Latinam") and having the suffixes "-or" and "-ic";
 - greek-etymology.rq: retrieves all the lemmas with a Greek etymology (and thus included in the "Index Graecorum Vocabulorum in Linguam Latinam");
 - latinwordnet_synset.rq: retrieves all the lemmas belonging to a specific synset;
 - lemmi-POS-gender.rq: counts the lemmas in the LiLa Knowledge Base having a specific Part-of-Speech (e.g., NOUN) and a specific gender (e.g., neuter);
