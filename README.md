@@ -23,4 +23,5 @@ List of available queries (in alphabetical order):
 - UDante-synset.rq: finds all the lemmas belonging to a specific synset in UDante and IT-TB;
 - UDante-syntax.rq: given a specific lemma (e.g., "loquor"), it retrieves all the lemmas that are annotated as nsubj in Dante and subj IT-TB;
 - sentiment-text.rq: performs lexicon-based sentiment analysis on each text of the Epistole by Dante Alighieri using LatinAffectus v2;
-- sentiment-paragraph.rq: performs lexicon-based sentiment analysis on each paragraph of the letters written by Dante Alighieri using LatinAffectus v2.
+- sentiment-paragraph.rq: performs lexicon-based sentiment analysis on each paragraph of the letters written by Dante Alighieri using LatinAffectus v2;
+- distinctivelemmas-Fibonacci.rq: finds all the lemmas that are used only by Fibonacci, thus are not present in the other corpora currently linked in the LiLa KB.
