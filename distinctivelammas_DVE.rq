@@ -1,0 +1,51 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix powla: <http://purl.org/powla/powla.owl#>
+prefix corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Use the endpoint "corpora"
+# Find all the lemmas that are used by Dante only in the De Vulgari Eloquentia and not in his other works
+
+SELECT (GROUP_CONCAT(DISTINCT ?wr ; separator=", ") as ?wrs) ?lemma ?freq 
+WHERE {
+{SELECT  ?lemma (count(?lemma) as ?freq)
+WHERE {
+        ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Vulgari%20Eloquentia> .
+      ?tokenQuer rdf:type powla:Terminal;
+             corpora:hasCitStructure ?CitationLayer.
+       ?tokenQuer lila:hasLemma ?lemma
+} group by ?lemma 
+order by desc (?freq) 
+} 
+   OPTIONAL {
+     service <https://lila-erc.eu/sparql/lemmaBank/query> {
+     ?lemma lila:isHypolemma ?originalLemmaHypo
+     }
+     }
+   OPTIONAL {
+     service <https://lila-erc.eu/sparql/lemmaBank/query> {
+     ?lemma lila:lemmaVariant ?originalLemmaVariant
+     }
+     }
+minus {
+    VALUES ?OtherCitationLayerDocument {<http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Monarchia> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Egloghe> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Vulgari%20Eloquentia> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Epistole>
+      <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Quaestio%20de%20aqua%20et%20terra>}
+     ?OtherToken rdf:type powla:Terminal;
+     corpora:hasCitStructure ?OtherCitationLayer .
+    ?OtherCitationLayer powla:hasDocument ?OtherCitationLayerDocument. 
+     Filter NOT EXISTS {
+         ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Vulgari%20Eloquentia> . 
+         }
+     ?OtherToken lila:hasLemma ?lemma .
+     BIND(?lemma AS ?originalLemmaVariant).
+     BIND(?lemma AS ?originalLemmaHypo).
+    }
+service <https://lila-erc.eu/sparql/lemmaBank/query> {
+    ?lemma ontolex:writtenRep ?wr .
+   }
+} group by ?lemma ?freq
+order by desc (?freq)
+
