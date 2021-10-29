@@ -4,7 +4,7 @@ Selection of SPARQL queries to be used in the LiLa endpoints: [https://lila-erc.
 List of available queries (in alphabetical order):
 - affixes-nouns.rq: counts the frequency of affixes (both prefixes and suffixes) attached to nouns in the LiLa Knowledge Base and sorts them from the most to the least frequent;
 - corpora.rq: lists all the corpora currently available in the LiLa Knowledge Base;
-- - distinctivelemmas-Fibonacci.rq: finds all the lemmas that are used only by Fibonacci, thus are not present in the other corpora currently linked in the LiLa KB;
+- distinctivelemmas-Fibonacci.rq: finds all the lemmas that are used only by Fibonacci, thus are not present in the other corpora currently linked in the LiLa KB;
 - distinctivelemmas-DVE.rq: find all the lemmas that are used by Dante only in the "De Vulgari Eloquentia" and not in his other works;
 - etymology.rq: retrieves all lemmas with a Proto-Italic reconstructed form;
 - form-lemma.rq: retrieves the occurrences of the forms of a specific lemma (e.g., "malus" [<http://lila-erc.eu/data/id/lemma/111418>](<http://lila-erc.eu/data/id/lemma/111418>)) in all the corpora linked to the LiLa Knowledge Base;
