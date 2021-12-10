@@ -10,13 +10,12 @@ prefix lila_corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 SELECT  ?ep (SUM(?v) as ?sentVal) (COUNT(?v) as ?count) 
 ((SUM(?v) / COUNT(?v)) as ?normVal)
 WHERE {
-    service <https://lila-erc.eu/sparql/lexicalResources/query> {
     VALUES ?polarity { marl:Positive marl:Negative } 
         ?le ontolex:canonicalForm ?lemma ;
         ontolex:sense ?sense .
     ?sense marl:hasPolarity ?polarity ;
-          marl:polarityValue  ?v ;
-    }
+          marl:polarityValue  ?v .
+    
    
     ?token lila:hasLemma ?lemma ;           
       ^powla:hasChild/^lila_corpora:hasCitSubUnit ?ep.
@@ -25,3 +24,4 @@ WHERE {
                    lila_corpora:isLayer ?ep .
 } group by  (?ep)
 order by ?ep
+

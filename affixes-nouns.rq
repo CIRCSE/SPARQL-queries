@@ -2,14 +2,12 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
 
-# Use the endpoint "lemmaBank"
 # Count the frequency of used affixes (both prefixes and suffixes) attached to noun and sort them from the most to the least frequent
-
 SELECT ?aff  ?afflab ?type (count(?aff) as ?count)
 WHERE {
-   ?lemma  lila:hasPOS lila:noun ;
-           (lila:hasPrefix|lila:hasSuffix) ?aff .
-   ?aff rdfs:label ?afflab ;
+  ?lemma  lila:hasPOS lila:noun ;
+          (lila:hasPrefix|lila:hasSuffix) ?aff .
+  ?aff rdfs:label ?afflab ;
        a ?type
 }
 GROUP BY ?aff ?afflab ?type

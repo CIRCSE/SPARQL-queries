@@ -7,27 +7,19 @@ prefix lila: <http://lila-erc.eu/ontologies/lila/>
 prefix UDanteSynFunction: <http://lila-erc.eu/data/corpora/DanteSearch/id/UDsynFunction/>
 prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 
-# Use the endpoint "corpora"
 # Given a lexical base (loquor), find all the lemmas of that lexical base in Dante and ITTB
-
 SELECT ?sameBaseLemmaLabel ?docTitle
 WHERE {
-  VALUES ?copora {<http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>}
-  service <https://lila-erc.eu/sparql/lemmaBank/query> {
-  <http://lila-erc.eu/data/id/lemma/110805> lila:hasBase ?base .
-        ?sameBaseLemma lila:hasBase ?base.                             
-  
+  VALUES ?copora {
+    <http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>
   }
-  
-
+  <http://lila-erc.eu/data/id/lemma/110805> lila:hasBase ?base .
+  ?sameBaseLemma lila:hasBase ?base.
   ?token rdf:type powla:Terminal;
          lila:hasLemma ?sameBaseLemma .
   ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
   ?doc dc:title ?docTitle .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora ;
-  service <https://lila-erc.eu/sparql/lemmaBank/query> {
-     ?sameBaseLemma rdfs:label ?sameBaseLemmaLabel.
-  }
-  
+  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?sameBaseLemma rdfs:label ?sameBaseLemmaLabel.
 }group by ?sameBaseLemma ?sameBaseLemmaLabel ?docTitle
 order by ?sameBaseLemma ?docTitle

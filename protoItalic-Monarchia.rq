@@ -9,30 +9,23 @@ PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
-# Use the endpoint "corpora"
 # Find the lemmas with a proto-italic reconstructed forms in the "Monarchia" of Dante Alighieri
-
 SELECT  ?lemma ?wrs ?pie
 {
-
-  {SELECT ?lemma (GROUP_CONCAT(?wr ; separator=", ") as ?wrs ) ?pie {
-  service <https://lila-erc.eu/sparql/lemmaBank/query> {
-       service <https://lila-erc.eu/sparql/lexicalResources/query> {
-        ?le a ontolex:LexicalEntry ;
-        ontolex:canonicalForm ?lemma ;
-        lemonEty:etymology ?e .
-    ?e lemonEty:etymon ?pieety .
-    ?pieety lime:language "PIt" ;
-         rdfs:label ?pie .
-      }
-    ?lemma ontolex:writtenRep ?wr
-  }
-  }group by ?lemma ?pie
+  {
+    SELECT ?lemma (GROUP_CONCAT(?wr ;separator=", ") as ?wrs ) ?pie {
+      ?le a ontolex:LexicalEntry ;
+  ontolex:canonicalForm ?lemma ;
+  lemonEty:etymology ?e .
+      ?e lemonEty:etymon ?pieety .
+      ?pieety lime:language "PIt" ;
+              rdfs:label ?pie .
+      ?lemma ontolex:writtenRep ?wr
+    }group by ?lemma ?pie
   }
   ?tokenURI lila:hasLemma ?lemma .
   ?tokenURI lilaCorpus:hasCitStructure ?citLayer .
   ?citLayer powla:hasDocument ?doc .
   ?doc dc:title "De Monarchia".
-
 }
 group by ?lemma ?wrs ?pie

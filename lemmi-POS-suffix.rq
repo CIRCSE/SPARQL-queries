@@ -5,19 +5,17 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix powla: <http://purl.org/powla/powla.owl#>
 prefix lemma: <http://lila-erc.eu/data/id/lemma#>
 
-# Use the endpoint "lemmaBank" 
 # Retrieve the lemmas in the Lemma Bank with a specific Part-of-Speech (e.g., NOUN) and a suffix
-
-
-SELECT ?lemma_wr ?suffix_wr
+SELECT (GROUP_CONCAT(DISTINCT ?lemma_wr ;separator=", ") as ?wrs) ?suffix_wr
 WHERE {
-  ?s lila:hasPOS lila:noun ;
+  ?lemma lila:hasPOS lila:noun ;
      lila:hasSuffix ?suffix ;
      ontolex:writtenRep ?lemma_wr .
   ?suffix rdfs:label ?suffix_wr
-}
+} group by ?lemma ?suffix_wr
 order by ?suffix_wr
-LIMIT 25
+
+
 
 
 

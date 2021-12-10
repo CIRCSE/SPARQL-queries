@@ -10,37 +10,34 @@ PREFIX ittb: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 PREFIX lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix wn: <http://wordnet-rdf.princeton.edu/ontology#>
 
-# Use the endpoint "LexicalResources"
 # Retrieve all the lemmas belonging to a specific synset
-
 select ?lemma ?lab ?base ?syn where {
-  { values ?syn { <http://wordnet-rdf.princeton.edu/wn30/02587375-v> }
+  {
+    values ?syn {
+      <http://wordnet-rdf.princeton.edu/wn30/02587375-v> 
+    }
     ?le ontolex:canonicalForm ?lemma ;
-        ontolex:evokes ?syn ; 
-        service <http://lila-erc.eu/sparql/lemmaBank> {
-    		?lemma rdfs:label ?lab ;
-    		lila:hasBase ?base .
-  		}
-   }
-  UNION
-  { ?le ontolex:canonicalForm ?lemma ;
         ontolex:evokes ?syn .
-     <http://wordnet-rdf.princeton.edu/wn30/02587375-v> wn:hypernym ?syn .
-    service <http://lila-erc.eu/sparql/lemmaBank> {
-    		?lemma rdfs:label ?lab ;
-    		lila:hasBase ?base .
-  		}
+    ?lemma rdfs:label ?lab ;
+           lila:hasBase ?base .
+  }
+  UNION
+  {
+    ?le ontolex:canonicalForm ?lemma ;
+        ontolex:evokes ?syn .
+    <http://wordnet-rdf.princeton.edu/wn30/02587375-v> wn:hypernym ?syn .
+    ?lemma rdfs:label ?lab ;
+           lila:hasBase ?base .
   }
   UNION 
-  {?le ontolex:canonicalForm ?l ;
+  {
+    ?le ontolex:canonicalForm ?l ;
         ontolex:evokes ?syn_syn .
-     <http://wordnet-rdf.princeton.edu/wn30/02587375-v> wn:hypernym ?syn_syn .
-    service <http://lila-erc.eu/sparql/lemmaBank> {
-    		?l lila:hasBase ?base .
-      		?lemma a lila:Lemma ;
-               lila:hasPOS lila:verb;
-               lila:hasBase ?base ;
-               rdfs:label ?lab .
-    }
+    <http://wordnet-rdf.princeton.edu/wn30/02587375-v> wn:hypernym ?syn_syn .
+    ?l lila:hasBase ?base .
+    ?lemma a lila:Lemma ;
+       lila:hasPOS lila:verb;
+       lila:hasBase ?base ;
+       rdfs:label ?lab .
   }
-}   
+}

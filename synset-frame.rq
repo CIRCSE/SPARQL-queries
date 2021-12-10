@@ -10,24 +10,16 @@ prefix marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
 prefix premon: <http://premon.fbk.eu/ontology/core#>
 prefix lv: <http://lila-erc.eu/ontologies/latinVallex/>
 
-# Use the endpoint "corpora"
 # Find forms that have a specific synset in the currently revised portion of Latin WordNet (e.g. 00179311-v: "take out, take away") and a valency frame in Latin Vallex with specific functor (e.g., ADDR "addressee")
-
 SELECT ?form (count(?form) as ?count) ?docTitle ?prefixlabel
 WHERE {
-    service <https://lila-erc.eu/sparql/lexicalResources/query> {
-    ?le ontolex:canonicalForm ?lemma ;
-        ontolex:evokes ?frame ;
-        ontolex:evokes <http://wordnet-rdf.princeton.edu/wn30/00179311-v> .
-    ?frame premon:semRole ?SemRole .
-    ?SemRole lv:functor <http://lila-erc.eu/ontologies/latinVallex/ADDR> .
-  }       
-
-  service <https://lila-erc.eu/sparql/lemmaBank/query> {
-   ?lemma lila:hasPrefix ?prefix .
-   ?prefix rdfs:label ?prefixlabel .
-  }
-  
+  ?le ontolex:canonicalForm ?lemma ;
+      ontolex:evokes ?frame ;
+      ontolex:evokes <http://wordnet-rdf.princeton.edu/wn30/00179311-v> .
+  ?frame premon:semRole ?SemRole .
+  ?SemRole lv:functor <http://lila-erc.eu/ontologies/latinVallex/ADDR> .
+  ?lemma lila:hasPrefix ?prefix .
+  ?prefix rdfs:label ?prefixlabel .
   ?token lila:hasLemma ?lemma ;
          rdfs:label ?form ;
          lilacorpora:hasCitStructure ?citLayer .

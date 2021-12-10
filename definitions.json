@@ -1,0 +1,122 @@
+[
+    {
+        "title": "Documents in LiLa",
+        "description": "Get all documents in LiLa knowledge base",
+        "file": "lila_documents.rq"
+    },
+    {
+        "title": "Lexical resources in LiLa",
+        "description": "Get all lexical resources in LiLa knowledge base",
+        "file": "lila_lexical.rq"
+    },
+    {
+        "title": "Affixes-Noun",
+        "description": "Counts the frequency of affixes (both prefixes and suffixes) attached to nouns in the LiLa Knowledge Base and sorts them from the most to the least frequent",
+        "file": "affixes-nouns.rq"
+    },
+    {
+        "title": "Corpora",
+        "description": "Lists all the corpora currently available in the LiLa Knowledge Base",
+        "file": "corpora.rq"
+    },
+    {
+        "title": "Distinctive lemmas De Vulgari Eloquentia",
+        "description": "Find all the lemmas that are used by Dante only in the \"De Vulgari Eloquentia\" and not in his other works",
+        "file": "distinctivelammas-DVE.rq"
+    },
+    {
+        "title": "Distinctive lemmas Fibonacci",
+        "description": "Finds all the lemmas that are used only by Fibonacci, thus are not present in the other corpora currently linked in the LiLa KB",
+        "file": "distinctivelemmas-Fibonacci.rq"
+    },
+    {
+        "title": "Proto-Italic lemmas",
+        "description": "Retrieves all lemmas with a Proto-Italic reconstructed form",
+        "file": "etymology.rq"
+    },
+    {
+        "title": "\"Dico\" and \"Facio\" in De Vulgari Eloquentia",
+        "description": "Counts the occurrences of each form of the lemmas 'dico' and 'facio' in the work \"De Vulgari Eloquentia\" of Dante Alighieri;",
+        "file": "forms-DVE.rq"
+    },
+    {
+        "title": "Greek etymology in \"Querolus sive Aulularia\"",
+        "description": "Retrieves all lemmas of the \"Querolus sive Aulularia\" corpus with a Greek etymology (and thus included in the \"Index Graecorum Vocabulorum in Linguam Latinam\") and having the suffixes \"-or\" and \"-ic\"",
+        "file": "greek-Aulularia.rq"
+    },
+    {
+        "title": "Index Graecorum Vocabulorum in Linguam Latinam",
+        "description": "Retrieves all the lemmas with a Greek etymology (and thus included in the \"Index Graecorum Vocabulorum in Linguam Latinam\"",
+        "file": "greek-etymology.rq"
+    },
+    {
+        "title": "Latin Wordnet",
+        "description": "Retrieves all the lemmas belonging to a specific synset",
+        "file": "latinwordnet_synset.rq"
+    },
+    {
+        "title": "Lemmas with specific pos/gender",
+        "description": "Counts the lemmas in the LiLa Knowledge Base having a specific Part-of-Speech (e.g., NOUN) and a specific gender (e.g., neuter)",
+        "file": "lemmi-POS-gender.rq"
+    },
+    {
+        "title": "Lemmas with specific pos/suffix",
+        "description": "Retrieves the lemmas in the Lemma Bank with a specific Part-of-Speech (e.g., NOUN) and a suffix",
+        "file": "lemmi-POS-suffix.rq"
+    },
+    {
+        "title": "Lemmas with POS",
+        "description": "Retrieves the lemmas in the Lemma Bank with a specific Part-of-Speech (e.g., NOUN) and a suffix",
+        "file": "lemmi-POS.rq"
+    },
+    {
+        "title": "Proto-Italic lemmas in the \"Monarchia\"",
+        "description": "Retrieves all the lemmas with a Proto-Italic reconstructed form in the \"Monarchia\" of Dante Alighieri",
+        "file": "protoItalic-Monarchia.rq"
+    },
+    {
+        "title": "Paragraph sentiment analysis in Dante",
+        "description": "Performs lexicon-based sentiment analysis on each paragraph of the letters written by Dante Alighieri using LatinAffectus v2",
+        "file": "sentiment-paragraph.rq"
+    },
+    {
+        "title": "Textual sentiment analysis in Dante",
+        "description": "Performs lexicon-based sentiment analysis on each text of the Epistole by Dante Alighieri using LatinAffectus v2",
+        "file": "sentiment-text.rq"
+    },
+    {
+        "title": "Textual sentiment analysis in Dante",
+        "description": "Finds the forms that have a specific synset in the currently revised portion of Latin WordNet (e.g. 00179311-v: \"take out, take away\") and a valency frame with specific functor (e.g., ADDR \"addressee\") in Latin Vallex",
+        "file": "synset-frame.rq"
+    },
+    {
+        "title": "Tokens of \"occido\"",
+        "description": "Given a lemma (e.g., \"occido\"), it retrieves all the tokens having that lemma in the works linked in the LiLa knowledge base",
+        "file": "tokens.rq"
+    },
+    {
+        "title": "Affix \"-in\" in UDante and IT-TB",
+        "description": "Given an affix (e.g., “in- (negative)”), it finds all the lemmas with such affix in UDante and IT-TB",
+        "file": "UDante-affix.rq"
+    },
+    {
+        "title": "Lemmas of a specific base in Dante and IT-TB",
+        "description": "Given a lexical base (e.g., \"loquor\"), it finds all the lemmas belonging to the same lexical base in Dante and IT-TB",
+        "file": "UDante-lexicalbase.rq"
+    },
+    {
+        "title": "Sentiment in UDante",
+        "description": "Retrieves the list of lemmas with a specific polarity in UDante",
+        "file": "UDante-sentiment.rq"
+    },
+    {
+        "title": "Specific synset in UDante and IT-TB",
+        "description": "Finds all the lemmas belonging to a specific synset in UDante and IT-TB",
+        "file": "UDante-synset.rq"
+    },
+    {
+        "title": "Nsubj and subj of \"loquor\" in UDante and IT-TB",
+        "description": "Given a specific lemma (e.g., \"loquor\"), it retrieves all the lemmas that are annotated as nsubj in Dante and subj IT-TB",
+        "file": "UDante-syntax.rq"
+    }
+]

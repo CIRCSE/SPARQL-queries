@@ -4,45 +4,37 @@ prefix lila: <http://lila-erc.eu/ontologies/lila/>
 prefix powla: <http://purl.org/powla/powla.owl#>
 prefix corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-# Use the endpoint "corpora"
 # Find all the lemmas that are used only by Fibonacci, thus are not present in the other corpora currently linked in the LiLa KB
-
-SELECT (GROUP_CONCAT(DISTINCT ?wr ; separator=", ") as ?wrs) ?lemma ?freq 
+SELECT (GROUP_CONCAT(DISTINCT ?wr ;
+    separator=", ") as ?wrs) ?lemma ?freq 
 WHERE {
-{SELECT  ?lemma (count(?lemma) as ?freq)
-WHERE {
-        ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> .
+  {
+    SELECT  ?lemma (count(?lemma) as ?freq)
+    WHERE {
+      ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> .
       ?tokenQuer rdf:type powla:Terminal;
-             corpora:hasCitStructure ?CitationLayer.
-       ?tokenQuer lila:hasLemma ?lemma
-} group by ?lemma 
-order by desc (?freq) 
-} 
-   OPTIONAL {
-     service <https://lila-erc.eu/sparql/lemmaBank/query> {
-     ?lemma lila:isHypolemma ?originalLemmaHypo
-     }
-     }
-   OPTIONAL {
-     service <https://lila-erc.eu/sparql/lemmaBank/query> {
-     ?lemma lila:lemmaVariant ?originalLemmaVariant
-     }
-     }
-minus {
-     
-     ?OtherToken rdf:type powla:Terminal;
-     corpora:hasCitStructure ?OtherCitationLayer .
-     Filter NOT EXISTS {
-         ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> . 
-         }
-     ?OtherToken lila:hasLemma ?lemma .
-     BIND(?lemma AS ?originalLemmaVariant).
-     BIND(?lemma AS ?originalLemmaHypo).
+                 corpora:hasCitStructure ?CitationLayer.
+      ?tokenQuer lila:hasLemma ?lemma
+    } group by ?lemma 
+    order by desc (?freq) 
+  } 
+  OPTIONAL {
+    ?lemma lila:isHypolemma ?originalLemmaHypo
+  }
+  OPTIONAL {
+    ?lemma lila:lemmaVariant ?originalLemmaVariant
+  }
+  minus {
+    ?OtherToken rdf:type powla:Terminal;
+                corpora:hasCitStructure ?OtherCitationLayer .
+    Filter NOT EXISTS {
+      ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> .
     }
-service <https://lila-erc.eu/sparql/lemmaBank/query> {
-    ?lemma ontolex:writtenRep ?wr .
-   }
+    ?OtherToken lila:hasLemma ?lemma .
+    BIND(?lemma AS ?originalLemmaVariant).
+    BIND(?lemma AS ?originalLemmaHypo).
+  }
+  ?lemma ontolex:writtenRep ?wr .
 } group by ?lemma ?freq
 order by desc (?freq)

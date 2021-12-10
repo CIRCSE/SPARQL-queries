@@ -7,14 +7,12 @@ PREFIX lilaCorpus: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
-# Use the endpoint "corpora"
 # Given a lemma (e.g., "occido"), retrieve all the tokens having that lemma in the works linked in the LiLa knowledge base
 
 SELECT ?tokenURI ?tokenLabel ?lemma ?label
 {
-  service <https://lila-erc.eu/sparql/lemmaBank/query> {
-      ?lemma ontolex:writtenRep "occido"
-  } 
+      ?lemma ontolex:writtenRep "occido".
+  
      ?tokenURI lila:hasLemma ?lemma ;
           rdf:type powla:Terminal;
           powla:hasStringValue ?tokenLabel .
@@ -23,3 +21,4 @@ SELECT ?tokenURI ?tokenLabel ?lemma ?label
       ?doc dc:title ?label 
 }
 order by ?label
+

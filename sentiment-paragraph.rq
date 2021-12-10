@@ -16,13 +16,13 @@ WHERE {
   ?ep lila_corpora:hasCitSubUnit ?par .
   ?par powla:hasChild ?token.
   ?token lila:hasLemma ?lemma .   
-    service <https://lila-erc.eu/sparql/lexicalResources/query> {
     VALUES ?polarity { marl:Positive marl:Negative } 
         ?le ontolex:canonicalForm ?lemma ;
         ontolex:sense ?sense .
     ?sense marl:hasPolarity ?polarity ;
-       marl:polarityValue  ?v ;
-    }
+       marl:polarityValue  ?v .
+    
  
 } group by  ?ep ?par
 order by ?ep ?par
+

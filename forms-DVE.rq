@@ -6,15 +6,13 @@ PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
 
-# Use the endpoint "corpora"
 # Count the occurrences of forms of the lemmas 'dico' and 'facio' in "De Vulgari Eloquentia" of Dante Alighieri.
-
 SELECT ?lowcase_form (count(?form) as ?count)
 WHERE {
-  service <https://lila-erc.eu/sparql/lemmaBank/query> {
-    VALUES ?LemmaValue { 'dico' 'facio' }
-      ?lemma ontolex:writtenRep ?LemmaValue
+  VALUES ?LemmaValue {
+    'dico' 'facio' 
   }
+  ?lemma ontolex:writtenRep ?LemmaValue.
   ?token lila:hasLemma ?lemma ;
          rdfs:label ?form ;
          lilacorpora:hasCitStructure ?citLayer .

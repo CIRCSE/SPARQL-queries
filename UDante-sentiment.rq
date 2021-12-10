@@ -6,25 +6,20 @@ prefix lime: <http://www.w3.org/ns/lemon/lime#>
 prefix marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
 prefix powla: <http://purl.org/powla/powla.owl#>
 prefix corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
-
 PREFIX ittb: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 
-# Use the endpoint "LexicalResources"
-# List of lemmas with a positive negative in UDante 
+# List of negative lemmas in UDante 
 
 SELECT  ?pnomlemma ?lablemma (count(?pnomlemma) as ?tot)  WHERE {
-   <http://lila-erc.eu/data/lexicalResources/LatinAffectus/Lexicon> lime:entry ?lexentry .
-    ?lexentry ontolex:canonicalForm ?pnomlemma ;
-        ontolex:sense [ marl:hasPolarity marl:Negative ]
-      
-        SERVICE <http://lila-erc.eu/sparql/corpora/sparql> {
-           VALUES ?corpora {<http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>}
-          ?t a powla:Terminal ;
-             lila:hasLemma ?pnomlemma .
-          ?t lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?corpora ;
-}
-    SERVICE <http://lila-erc.eu/sparql/lemmaBank/sparql> {
-    ?pnomlemma rdfs:label ?lablemma
+  <http://lila-erc.eu/data/lexicalResources/LatinAffectus/Lexicon> lime:entry ?lexentry .
+  ?lexentry ontolex:canonicalForm ?pnomlemma ;
+            ontolex:sense [ marl:hasPolarity marl:Negative ]
+  VALUES ?corpora {
+    <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>
   }
+  ?t a powla:Terminal ;
+                            lila:hasLemma ?pnomlemma .
+  ?t lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?corpora .
+  ?pnomlemma rdfs:label ?lablemma
 }group by ?pnomlemma ?lablemma
 order by desc(?tot)
