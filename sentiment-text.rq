@@ -20,7 +20,7 @@ WHERE {
     ?token lila:hasLemma ?lemma ;           
       ^powla:hasChild/^lila_corpora:hasCitSubUnit ?ep.
    ?CitationLayer powla:hasDocument 
-      <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Epistole>;
+      <http://lila-erc.eu/data/corpora/UDante/id/corpus/Epistole>;
                    lila_corpora:isLayer ?ep .
 } group by  (?ep)
 order by ?ep

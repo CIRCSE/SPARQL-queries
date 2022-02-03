@@ -1,8 +1,6 @@
 # SPARQL-queries
 Selection of SPARQL queries to be used in the LiLa endpoints: [https://lila-erc.eu/sparql/index.html](https://lila-erc.eu/sparql/index.html).
 
-**10/12/2021 - We migrated our endpoint to Virtuoso: the queries have been updated accordingly**
-
 List of available queries (in alphabetical order):
 - affixes-nouns.rq: counts the frequency of affixes (both prefixes and suffixes) attached to nouns in the LiLa Knowledge Base and sorts them from the most to the least frequent;
 - corpora.rq: lists all the corpora currently available in the LiLa Knowledge Base;

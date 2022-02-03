@@ -11,7 +11,7 @@ SELECT  ?ep ?par (SUM(?v) as ?sentVal) (COUNT(?v) as ?count)
 ((SUM(?v) / COUNT(?v)) as ?normVal)
 WHERE {
    ?CitationLayer powla:hasDocument 
-   <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Epistole>;
+   <http://lila-erc.eu/data/corpora/UDante/id/corpus/Epistole>;
                    lila_corpora:isLayer ?ep .
   ?ep lila_corpora:hasCitSubUnit ?par .
   ?par powla:hasChild ?token.

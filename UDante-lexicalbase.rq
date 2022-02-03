@@ -4,14 +4,13 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
-prefix UDanteSynFunction: <http://lila-erc.eu/data/corpora/DanteSearch/id/UDsynFunction/>
 prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 
 # Given a lexical base (loquor), find all the lemmas of that lexical base in Dante and ITTB
 SELECT ?sameBaseLemmaLabel ?docTitle
 WHERE {
   VALUES ?copora {
-    <http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>
+    <http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/UDante/id/corpus>
   }
   <http://lila-erc.eu/data/id/lemma/110805> lila:hasBase ?base .
   ?sameBaseLemma lila:hasBase ?base.

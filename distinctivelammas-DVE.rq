@@ -12,7 +12,7 @@ WHERE {
   {
     SELECT  ?lemma (count(?lemma) as ?freq)
     WHERE {
-      ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Vulgari%20Eloquentia> .
+      ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Vulgari%20Eloquentia> .
       ?tokenQuer rdf:type powla:Terminal;
                  corpora:hasCitStructure ?CitationLayer.
       ?tokenQuer lila:hasLemma ?lemma
@@ -27,14 +27,14 @@ WHERE {
   }
   minus {
     VALUES ?OtherCitationLayerDocument {
-      <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Monarchia> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Egloghe> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Vulgari%20Eloquentia> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Epistole>
-      <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/Quaestio%20de%20aqua%20et%20terra>
+      <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Monarchia> <http://lila-erc.eu/data/corpora/UDante/id/corpus/Egloghe> <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Vulgari%20Eloquentia> <http://lila-erc.eu/data/corpora/UDante/id/corpus/Epistole>
+      <http://lila-erc.eu/data/corpora/UDante/id/corpus/Quaestio%20de%20aqua%20et%20terra>
     }
     ?OtherToken rdf:type powla:Terminal;
                 corpora:hasCitStructure ?OtherCitationLayer .
     ?OtherCitationLayer powla:hasDocument ?OtherCitationLayerDocument.
     Filter NOT EXISTS {
-      ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus/De%20Vulgari%20Eloquentia> .
+      ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Vulgari%20Eloquentia> .
     }
     ?OtherToken lila:hasLemma ?lemma .
     BIND(?lemma AS ?originalLemmaVariant).
@@ -43,3 +43,5 @@ WHERE {
   ?lemma ontolex:writtenRep ?wr .
 } group by ?lemma ?freq
 order by desc (?freq)
+
+

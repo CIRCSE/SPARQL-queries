@@ -4,7 +4,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
-prefix UDanteSynFunction: <http://lila-erc.eu/data/corpora/DanteSearch/id/UDsynFunction/>
+prefix UDSynFunction: <https://universaldependencies.org/u/dep/>
 prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 
 # Given the lemma "loquor" gives all the lemmas that are annotated as nsubj in Dante and subj ITTB
@@ -12,10 +12,10 @@ prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 SELECT ?subLemmaLabel ?docTitle
 WHERE {
   VALUES ?copora {
-    <http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/DanteSearch/id/corpus>
+    <http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/UDante/id/corpus>
   }
   VALUES ?synFunctions {
-    UDanteSynFunction:nsubj ITTBSynFunction:Sb
+    UDSynFunction:nsubj ITTBSynFunction:Sb
   }
   ?token rdf:type powla:Terminal;
          lila:hasLemma <http://lila-erc.eu/data/id/lemma/110805> .
