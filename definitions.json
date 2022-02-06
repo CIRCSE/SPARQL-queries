@@ -19,6 +19,31 @@
         "description": "Lists all the corpora currently available in the LiLa Knowledge Base",
         "file": "corpora.rq"
     },
+     {
+        "title": "LASLA - Distinctive lemmas Catullus",
+        "description": "Find all the lemmas that are used only by Catullus",
+        "file": "laslaCatullo.rq"
+    },
+    {
+        "title": "LASLA - \"Dico\" and \"Facio\" in De Vulgari Eloquentia and Seneca's \"De Otio\"",
+        "description": "Count the occurrences of forms of the lemmas 'dico' and 'facio' in Dante's \"De Vulgari Eloquentia\" and Seneca's \"De Otio\".",
+        "file": "laslaDicoFacio.rq"
+    },
+    {
+        "title": "LASLA - Get all documents in LASLA corpus",
+        "description": "List all the texts in the LASLA corpus",
+        "file": "laslaDocument.rq"
+    },
+    {
+        "title": "LASLA - Negative lemmas in LASLA ",
+        "description": "List of negative lemmas in the LASLA corpus ",
+        "file": "laslaNegative.rq"
+    },
+    {
+        "title": "LASLA - Base \"patior\" in ITTB, UDante and Seneca",
+        "description": "Given a lexical base (patior), find all the lemmas of that lexical base in Dante, ITTB and Seneca",
+        "file": "laslaPatior.rq"
+    },
     {
         "title": "Distinctive lemmas De Vulgari Eloquentia",
         "description": "Find all the lemmas that are used by Dante only in the \"De Vulgari Eloquentia\" and not in his other works",

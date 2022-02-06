@@ -1,0 +1,48 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcterm: <http://purl.org/dc/terms/>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
+
+
+# Given a lexical base (patior), find all the lemmas of that lexical base in Dante and ITTB and Seneca
+
+
+SELECT ?sameBaseLemma ?sameBaseLemmaLabel ?doc ?docTitle
+WHERE {
+  {
+    select ?sameBaseLemma ?doc ?docTitle where{
+      VALUES ?copora {
+        <http://lila-erc.eu/data/corpora/ITTB/id/corpus> <http://lila-erc.eu/data/corpora/UDante/id/corpus> <http://lila-erc.eu/data/corpora/LASLA/id/corpus>
+      }
+      VALUES ?base {
+        <http://lila-erc.eu/data/id/base/942>
+      }
+      ?sameBaseLemma lila:hasBase ?base.
+      ?token rdf:type powla:Terminal;
+             lila:hasLemma ?sameBaseLemma .
+      ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+      ?doc dc:title ?docTitle .
+      ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+    }
+  }
+  UNION{
+    select ?sameBaseLemma ?doc ?docTitle where{
+       VALUES ?base {
+        <http://lila-erc.eu/data/id/base/942>
+      }
+      ?doc dcterms:creator <http://www.wikidata.org/entity/Q2054>.
+      ?sameBaseLemma lila:hasBase ?base.
+      ?tokenSeneca rdf:type powla:Terminal;
+                   lila:hasLemma ?sameBaseLemma .
+      ?tokenSeneca lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+      ?doc dc:title ?docTitle .
+    }
+  }
+  ?sameBaseLemma rdfs:label ?sameBaseLemmaLabel.
+}group by ?sameBaseLemma ?sameBaseLemma ?sameBaseLemmaLabel ?docTitle
+order by ?sameBaseLemma ?docTitle

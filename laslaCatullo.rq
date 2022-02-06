@@ -1,0 +1,52 @@
+PREFIX dcterm: <http://purl.org/dc/terms/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix powla: <http://purl.org/powla/powla.owl#>
+prefix corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+# Find all the lemmas that are used only by Catullus
+
+SELECT (GROUP_CONCAT(DISTINCT ?wr ;
+    separator=", ") as ?wrs) ?lemma ?freq 
+WHERE {
+  VALUES ?author {
+    <http://www.wikidata.org/entity/Q163079> 
+  }
+  {
+    SELECT  ?lemma (count(?lemma) as ?freq)
+    WHERE {
+      ?document dcterms:creator ?author.
+      ?CitationLayer powla:hasDocument ?document ;
+                     dc:title ?CitationLayerLabel.
+      ?tokenQuer rdf:type powla:Terminal;
+                 corpora:hasCitStructure ?CitationLayer.
+      FILTER regex(str(?CitationLayerLabel), "Sentence")
+      ?tokenQuer lila:hasLemma ?lemma
+    } group by ?lemma 
+  } 
+  OPTIONAL {
+    ?lemma lila:isHypolemma ?originalLemmaHypo
+  }
+  OPTIONAL {
+    ?lemma lila:lemmaVariant ?originalLemmaVariant
+  }
+  minus {
+    ?notCatodocument dcterms:creator ?author.
+    Filter NOT EXISTS {
+      ?OtherCitationLayer powla:hasDocument ?notCatodocument .
+    }
+    ?OtherToken rdf:type powla:Terminal;
+                corpora:hasCitStructure ?OtherCitationLayer .
+    ?OtherCitationLayer powla:hasDocument ?OtherDocument.
+    ?OtherToken lila:hasLemma ?lemma .
+    BIND(?lemma AS ?originalLemmaVariant).
+    BIND(?lemma AS ?originalLemmaHypo).
+  }
+  ?lemma ontolex:writtenRep ?wr .
+} group by ?lemma ?freq
+order by desc (?freq)

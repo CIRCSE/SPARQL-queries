@@ -1,0 +1,12 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+prefix powla: <http://purl.org/powla/powla.owl#>
+
+# List all the texts in the LASLA corpus
+
+SELECT ?docTitle ?doc
+WHERE {
+  <http://lila-erc.eu/data/corpora/Lasla/id/corpus> powla:hasSubDocument ?doc.
+  ?doc dc:title ?docTitle
+}
+order by ?docTitle ?doc
+
