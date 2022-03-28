@@ -16,9 +16,10 @@ WHERE {
   ?sameBaseLemma lila:hasBase ?base.
   ?token rdf:type powla:Terminal;
          lila:hasLemma ?sameBaseLemma .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+  ?token powla:hasLayer/powla:hasDocument ?doc.
   ?doc dc:title ?docTitle .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?token powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?copora .
   ?sameBaseLemma rdfs:label ?sameBaseLemmaLabel.
 }group by ?sameBaseLemma ?sameBaseLemmaLabel ?docTitle
 order by ?sameBaseLemma ?docTitle
+
