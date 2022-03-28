@@ -19,9 +19,10 @@ WHERE {
   ?lemma ontolex:writtenRep ?LemmaValue.
   ?token lila:hasLemma ?lemma ;
          rdfs:label ?form ;
-         lilacorpora:hasCitStructure ?citLayer .
-  ?citLayer powla:hasDocument ?doc .
+         powla:hasLayer ?docLayer .
+  ?docLayer powla:hasDocument ?doc .
   ?doc dc:title ?texts
 }
 group by (lcase(?form) as ?lowcase_form) ?texts
 order by?lowcase_form
+

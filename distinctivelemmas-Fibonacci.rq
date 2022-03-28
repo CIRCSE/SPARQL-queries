@@ -12,9 +12,9 @@ WHERE {
   {
     SELECT  ?lemma (count(?lemma) as ?freq)
     WHERE {
-      ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> .
+      ?DocumentLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> .
       ?tokenQuer rdf:type powla:Terminal;
-                 corpora:hasCitStructure ?CitationLayer.
+                 powla:hasLayer ?DocumentLayer.
       ?tokenQuer lila:hasLemma ?lemma
     } group by ?lemma 
     order by desc (?freq) 
@@ -27,7 +27,7 @@ WHERE {
   }
   minus {
     ?OtherToken rdf:type powla:Terminal;
-                corpora:hasCitStructure ?OtherCitationLayer .
+                powla:hasLayer ?OtherCitationLayer .
     Filter NOT EXISTS {
       ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus/Liber%20Abbaci> .
     }

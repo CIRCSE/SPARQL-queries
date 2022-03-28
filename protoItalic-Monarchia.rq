@@ -24,8 +24,9 @@ SELECT  ?lemma ?wrs ?pie
     }group by ?lemma ?pie
   }
   ?tokenURI lila:hasLemma ?lemma .
-  ?tokenURI lilaCorpus:hasCitStructure ?citLayer .
-  ?citLayer powla:hasDocument ?doc .
+  ?tokenURI powla:hasLayer ?docLayer .
+  ?docLayer powla:hasDocument ?doc .
   ?doc dc:title "De Monarchia".
 }
 group by ?lemma ?wrs ?pie
+

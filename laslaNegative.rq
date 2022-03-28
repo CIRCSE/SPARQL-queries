@@ -18,8 +18,9 @@ SELECT  ?pnomlemma ?lablemma (count(?pnomlemma) as ?tot)  WHERE {
   }
   ?t a powla:Terminal ;
                             lila:hasLemma ?pnomlemma .
-  ?t lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?corpora .
+  ?t powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?corpora .
   ?pnomlemma rdfs:label ?lablemma
 }group by ?pnomlemma ?lablemma
 order by desc(?tot)
+
 

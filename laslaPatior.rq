@@ -1,3 +1,4 @@
+PREFIX po: <http://purl.org/ontology/po/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dcterm: <http://purl.org/dc/terms/>
 PREFIX powla: <http://purl.org/powla/powla.owl#>
@@ -25,9 +26,9 @@ WHERE {
       ?sameBaseLemma lila:hasBase ?base.
       ?token rdf:type powla:Terminal;
              lila:hasLemma ?sameBaseLemma .
-      ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+      ?token powla:hasLayer/powla:hasDocument ?doc.
       ?doc dc:title ?docTitle .
-      ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+      ?token powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?copora .
     }
   }
   UNION{
@@ -39,10 +40,11 @@ WHERE {
       ?sameBaseLemma lila:hasBase ?base.
       ?tokenSeneca rdf:type powla:Terminal;
                    lila:hasLemma ?sameBaseLemma .
-      ?tokenSeneca lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+      ?tokenSeneca powla:hasLayer/powla:hasDocument ?doc.
       ?doc dc:title ?docTitle .
     }
   }
   ?sameBaseLemma rdfs:label ?sameBaseLemmaLabel.
 }group by ?sameBaseLemma ?sameBaseLemma ?sameBaseLemmaLabel ?docTitle
 order by ?sameBaseLemma ?docTitle
+

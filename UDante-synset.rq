@@ -45,7 +45,8 @@ WHERE {
   }
   ?token lila:hasLemma ?lemma;
          rdfs:label ?tokenLabel.
-  ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
-  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?token powla:hasLayer/powla:hasDocument ?doc.
+  ?token powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?copora .
   ?doc dc:title ?docTitle .
 }group by ?lemma ?lemmaWrs ?docTitle
+

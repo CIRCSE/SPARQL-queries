@@ -21,11 +21,10 @@ WHERE {
     SELECT  ?lemma (count(?lemma) as ?freq)
     WHERE {
       ?document dcterms:creator ?author.
-      ?CitationLayer powla:hasDocument ?document ;
+      ?DocumentLayer powla:hasDocument ?document ;
                      dc:title ?CitationLayerLabel.
       ?tokenQuer rdf:type powla:Terminal;
-                 corpora:hasCitStructure ?CitationLayer.
-      FILTER regex(str(?CitationLayerLabel), "Sentence")
+                 powla:hasLayer ?DocumentLayer.
       ?tokenQuer lila:hasLemma ?lemma
     } group by ?lemma 
   } 
@@ -41,7 +40,7 @@ WHERE {
       ?OtherCitationLayer powla:hasDocument ?notCatodocument .
     }
     ?OtherToken rdf:type powla:Terminal;
-                corpora:hasCitStructure ?OtherCitationLayer .
+                powla:hasLayer ?OtherCitationLayer .
     ?OtherCitationLayer powla:hasDocument ?OtherDocument.
     ?OtherToken lila:hasLemma ?lemma .
     BIND(?lemma AS ?originalLemmaVariant).
@@ -50,3 +49,4 @@ WHERE {
   ?lemma ontolex:writtenRep ?wr .
 } group by ?lemma ?freq
 order by desc (?freq)
+

@@ -18,7 +18,8 @@ select (GROUP_CONCAT(DISTINCT ?wr ;
   VALUES ?sufLabel {
     "-or" "-ic"
   }
-  ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/Querolus/id/citationUnit/QuerolussiveAulularia> .
+  ?DocumentLayer powla:hasDocument <http://lila-erc.eu/data/corpora/Querolus/id/citationUnit/QuerolussiveAulularia> .
   ?tokenQuer <http://lila-erc.eu/ontologies/lila/hasLemma> ?lemma ;
-             <http://lila-erc.eu/ontologies/lila_corpora/hasCitStructure> ?CitationLayer.
+             powla:hasLayer ?DocumentLayer.
 }group by ?lemma
+

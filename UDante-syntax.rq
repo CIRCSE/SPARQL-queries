@@ -23,8 +23,8 @@ WHERE {
        lilacorpora:hasHead ?token ;
        lilacorpora:hasDep ?subj .
   ?subj lila:hasLemma ?subjLemma .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+  ?token powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?token powla:hasLayer/powla:hasDocument ?doc.
   ?doc dc:title ?docTitle .
   VALUES ?nounPos {
     lila:proper_noun lila:noun 
@@ -32,3 +32,4 @@ WHERE {
   ?subjLemma lila:hasPOS ?nounPos .
   ?subjLemma rdfs:label ?subLemmaLabel.
 }group by ?subjLemma ?subLemmaLabel ?docTitle
+

@@ -14,9 +14,10 @@ WHERE {
   ?samePrefixLemma lila:hasPrefix <http://lila-erc.eu/data/id/prefix/20>  .
   ?token rdf:type powla:Terminal;
          lila:hasLemma ?samePrefixLemma .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument ?doc.
+  ?token powla:hasLayer/powla:hasDocument ?doc.
   ?doc dc:title ?docTitle .
-  ?token lilacorpora:hasCitStructure/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?token powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?copora .
   ?samePrefixLemma rdfs:label ?samePrefixLemmaLabel.
 }group by ?samePrefixLemma ?samePrefixLemmaLabel ?docTitle
 order by ?samePrefixLemma ?docTitle
+

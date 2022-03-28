@@ -15,10 +15,10 @@ WHERE {
   ?lemma ontolex:writtenRep ?LemmaValue.
   ?token lila:hasLemma ?lemma ;
          rdfs:label ?form ;
-         lilacorpora:hasCitStructure ?citLayer .
-  ?citLayer powla:hasDocument ?doc .
+         powla:hasLayer ?docLayer .
+  ?docLayer powla:hasDocument ?doc .
   ?doc dc:title 'De Vulgari Eloquentia'
 }
 group by (lcase(?form) as ?lowcase_form)
 order by desc(?count)
-limit 50
+

@@ -12,9 +12,9 @@ WHERE {
   {
     SELECT  ?lemma (count(?lemma) as ?freq)
     WHERE {
-      ?CitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Vulgari%20Eloquentia> .
+      ?DocumentLayer powla:hasDocument <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Vulgari%20Eloquentia> .
       ?tokenQuer rdf:type powla:Terminal;
-                 corpora:hasCitStructure ?CitationLayer.
+                 powla:hasLayer ?DocumentLayer.
       ?tokenQuer lila:hasLemma ?lemma
     } group by ?lemma 
     order by desc (?freq) 
@@ -31,7 +31,7 @@ WHERE {
       <http://lila-erc.eu/data/corpora/UDante/id/corpus/Quaestio%20de%20aqua%20et%20terra>
     }
     ?OtherToken rdf:type powla:Terminal;
-                corpora:hasCitStructure ?OtherCitationLayer .
+                powla:hasLayer ?OtherCitationLayer .
     ?OtherCitationLayer powla:hasDocument ?OtherCitationLayerDocument.
     Filter NOT EXISTS {
       ?OtherCitationLayer powla:hasDocument <http://lila-erc.eu/data/corpora/UDante/id/corpus/De%20Vulgari%20Eloquentia> .
@@ -43,5 +43,6 @@ WHERE {
   ?lemma ontolex:writtenRep ?wr .
 } group by ?lemma ?freq
 order by desc (?freq)
+
 
 
