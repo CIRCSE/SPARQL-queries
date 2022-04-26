@@ -44,6 +44,11 @@
         "description": "Given a lexical base (patior), find all the lemmas of that lexical base in Dante, ITTB and Seneca",
         "file": "laslaPatior.rq"
     },
+	{
+        "title": "ITTB - Singular indicative forms from bases",
+        "description": "Searches for the occurrences of singular indicative forms of lemmas that belong to the lexical base of either \"duco\"  or \"eo\"",
+        "file": "SingIndDucoEo.rq"
+    },
     {
         "title": "Distinctive lemmas De Vulgari Eloquentia",
         "description": "Find all the lemmas that are used by Dante only in the \"De Vulgari Eloquentia\" and not in his other works",
