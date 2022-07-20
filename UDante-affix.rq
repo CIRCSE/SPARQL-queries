@@ -5,7 +5,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
 
-# Given an affix (e.g. “in- (negative)”), find all the occurrences of lammas with such affixin UDante and ITTB
+# Given an affix (e.g. “in- (negative)”), find all the occurrences of lemma with such affixin UDante and ITTB
 SELECT  ?samePrefixLemmaLabel ?docTitle
 WHERE {
   VALUES ?copora {

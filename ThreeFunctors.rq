@@ -1,0 +1,39 @@
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix wn: <http://wordnet-rdf.princeton.edu/ontology#>
+prefix premon: <http://premon.fbk.eu/ontology/core#>
+prefix lv: <http://lila-erc.eu/ontologies/latinVallex/>
+
+# Find all the Verb with a sysnet with three functors
+
+SELECT (group_concat(distinct ?wr ; separator=" ") as ?wrs) ?le ?synLink  ?def  (GROUP_CONCAT(DISTINCT ?funcLabel ; separator=" ") as ?functors) (COUNT(DISTINCT ?funcLabel) as ?funcNum)
+{
+  ?lemma lila:hasPOS lila:verb . 
+  ?lemma ontolex:writtenRep ?wr .
+ ?le ontolex:canonicalForm ?lemma .
+      <http://lila-erc.eu/data/lexicalResources/LatinWordNet/Lexicon> lime:entry ?le . 
+    ?le ontolex:sense ?sense.
+      ?sense ontolex:isLexicalizedSenseOf ?synLink.
+    ?synLink skos:definition ?def.
+      OPTIONAL {
+      ?pT rdfs:subPropertyOf wn:link .
+      ?pT rdfs:label ?pTLabel.
+      ?synLink ?pT ?relSyn.
+      ?relSyn skos:definition ?defRel.
+      }
+    optional{
+         ?WNConc premon:evokedConcept ?synLink .
+         ?mapVWN premon:item ?Vconc;
+                 premon:item ?WNConc .
+         ?Vconc premon:evokedConcept ?frame.
+         ?le ontolex:evokes ?frame .
+           ?frame premon:semRole ?fs .
+         ?fs lv:functor ?functors . 
+         ?functors rdfs:label ?funcLabel
+    } 
+}group by ?lemma ?le ?sense ?synLink ?def 
+HAVING (COUNT(DISTINCT ?funcLabel) = 3)

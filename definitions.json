@@ -119,6 +119,11 @@
         "description": "Finds the forms that have a specific synset in the currently revised portion of Latin WordNet (e.g. 00179311-v: \"take out, take away\") and a valency frame with specific functor (e.g., ADDR \"addressee\") in Latin Vallex",
         "file": "synset-frame.rq"
     },
+ 	{
+        "title": "Verbs with three functors",
+        "description": "Find all the Verb with a sysnet with three functors",
+        "file": "ThreeFunctors.rq"
+    },
     {
         "title": "Tokens of \"occido\"",
         "description": "Given a lemma (e.g., \"occido\"), it retrieves all the tokens having that lemma in the works linked in the LiLa knowledge base",
