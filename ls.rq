@@ -1,0 +1,24 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+
+#Searches for the occurrences of the words whose definition in the LS dictionary includes the word "religion": (a) in the Latin works of Dante Alighieri and (b) in "Confessiones" by Augustine.
+
+SELECT (group_concat(distinct ?lemmaWrittenRep ; separator=", ") as ?lemmas) ?definitionContent ?tokenlabel ?token
+WHERE {
+  VALUES ?texts {<http://lila-erc.eu/data/corpora/CIRCSELatinLibrary/id/corpus/Confessiones/DocumentLayer> <http://lila-erc.eu/data/corpora/UDante/id/corpus/Egloghe/DocumentLayer>}
+  <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry ?lexentry .
+  ?lexentry ontolex:canonicalForm ?lemma ;
+            ontolex:evokes ?definition .
+  ?definition <http://www.w3.org/2004/02/skos#definition> ?definitionContent .
+  ?lemma ontolex:writtenRep ?lemmaWrittenRep .
+  FILTER regex(?definitionContent, "religion", "i")
+  ?token lila:hasLemma ?lemma ;
+         rdfs:label ?tokenlabel ;
+         powla:hasLayer ?texts .
+} order by ?lemmas ?token ?tokenlabel
+
