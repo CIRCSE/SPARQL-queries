@@ -19,6 +19,11 @@
         "description": "Lists all the corpora currently available in the LiLa Knowledge Base",
         "file": "corpora.rq"
     },
+    {
+        "title": "Lewis & Short Dictionary",
+        "description": "Occurrences of words whose LS definition contains \"religion\" in (a) \"Confessiones\" (Augustine) and (b) Latin works of Dante Alighieri",
+        "file": "ls.rq"
+    },
      {
         "title": "LASLA - Distinctive lemmas Catullus",
         "description": "Find all the lemmas that are used only by Catullus",
