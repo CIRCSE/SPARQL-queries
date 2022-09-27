@@ -45,6 +45,6 @@ WHERE {
     }
   }
   ?sameBaseLemma rdfs:label ?sameBaseLemmaLabel.
-}group by ?sameBaseLemma ?sameBaseLemma ?sameBaseLemmaLabel ?docTitle
+}group by ?sameBaseLemma ?sameBaseLemmaLabel ?docTitle
 order by ?sameBaseLemma ?docTitle
 
