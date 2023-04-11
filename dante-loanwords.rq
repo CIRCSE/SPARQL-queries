@@ -1,0 +1,24 @@
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX lemonEty: <http://lari-datasets.ilc.cnr.it/lemonEty#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+prefix powla: <http://purl.org/powla/powla.owl#>
+
+#Counts in the Latin works of Dante Alighieri the number of occurrences of those Latin words that are etyma of Latin loanwords in the Italian works of Dante Alighieri (provided by the "Dante Latin Loanwords" lexical resource).
+
+SELECT ?etylabel (count(?etylabel) as ?count)
+WHERE {
+  ?etymon a  lemonEty:Etymon ;
+  ontolex:canonicalForm ?lemma ;
+  rdfs:label ?etylabel .
+  ?etymology lemonEty:etymon ?etymon .
+  ?lexicalEntry lemonEty:etymology ?etymology .
+  <http://lila-erc.eu/data/lexicalResources/DanteLatinLoanwords/Lexicon> lime:entry ?lexicalEntry .
+  ?token lila:hasLemma ?lemma ;
+         powla:hasLayer ?tokenlayer .
+  ?tokenlayer powla:hasDocument ?tokendocument .
+  <http://lila-erc.eu/data/corpora/UDante/id/corpus> powla:hasSubDocument ?tokendocument .
+}
+GROUP BY ?etylabel
+ORDER BY DESC(?count)

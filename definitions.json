@@ -24,6 +24,11 @@
         "description": "Occurrences of words whose LS definition contains \"religion\" in (a) \"Confessiones\" (Augustine) and (b) Latin works of Dante Alighieri",
         "file": "ls.rq"
     },
+    {
+        "title": "Dante Latin Loanwords",
+        "description": "Counts in the Latin works of Dante Alighieri the number of occurrences of those Latin words that are etyma of Latin loanwords in the Italian works of Dante Alighieri (provided by the \"Dante Latin Loanwords\" lexical resource).",
+        "file": "dante-loanwords.rq"
+    },
      {
         "title": "LASLA - Distinctive lemmas Catullus",
         "description": "Find all the lemmas that are used only by Catullus",
