@@ -55,6 +55,27 @@
         "file": "laslaPatior.rq"
     },
 	{
+        "title": "CLaSSES - Tokens with affix \"-ad\" ",
+        "description": "Lists all the tokens of the various documents of the CLaSSES corpus that belong to a lemma featuring a specific affix in its derivational history (in the example: prefix n. 5 \"ad-\")",
+        "file": "CLaSSES-tok-ad.rq"
+    },
+	{
+        "title": "CLaSSES - Lemmas with affix ",
+        "description": "Lists the lemmas in the CLaSSES corpus that feature an affix (either prefix, or suffix) in their derivational history and reports the number of their occurrences therein",
+        "file": "CLaSSES-lemma-affix.rq"
+    },
+	{
+        "title": "CLaSSES - Count tokens with affix",
+        "description": "Counts the number of occurrences of words in the CLaSSES corpus that belong to a lemma featuring an affix (either prefix, or suffix) in its derivational history",
+        "file": "CLaSSES-count-token-affix.rq"
+    },
+	{
+        "title": "CLaSSES - Count lemmas in CLaSSES and Caesar's \"De bello gallico\" ",
+        "description": "Lists the lemmas with at least one occurrence both in the CLaSSES corpus and in Caesar's \"De bello gallico\" (from the LASLA corpus) and reports the number of their occurrences in the two corpora concerned.",
+        "file": "CLaSSES-tok-inDBG.rq"
+    },
+
+	{
         "title": "ITTB - Singular indicative forms from bases",
         "description": "Searches for the occurrences of singular indicative forms of lemmas that belong to the lexical base of either \"duco\"  or \"eo\"",
         "file": "SingIndDucoEo.rq"

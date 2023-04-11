@@ -1,0 +1,26 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX prefix: <http://lila-erc.eu/data/id/prefix/>
+
+#Lists the lemmas in the CLaSSES corpus that feature an affix (either prefix, or suffix) in their derivational history and reports the number of their occurrences therein
+
+
+SELECT ?lemmaLabel ?affixType ?affixLabel (count(?tokenClasses) as ?count)
+WHERE {
+  	?lemmaLiLa a lila:Lemma ;
+			(lila:hasPrefix|lila:hasSuffix) ?affix ;
+			rdfs:label ?lemmaLabel .
+  	?affix rdfs:label ?affixLabel ;
+			rdf:type ?affixType .
+	?tokenClasses lila:hasLemma ?lemmaLiLa ;
+			powla:hasLayer ?docLayer ;
+   			rdfs:label ?tokenClassesLabel .
+	?docLayer powla:hasDocument ?subDocLayer .
+	?subDocLayer dc:title ?titlesubDocLayer .
+  	<http://lila-erc.eu/data/corpora/CLaSSES/id/corpus> powla:hasSubDocument ?subDocLayer .
+} 
+GROUP BY ?lemmaLabel ?affixType ?affixLabel
+ORDER BY DESC(?count)

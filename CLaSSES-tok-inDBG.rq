@@ -1,0 +1,34 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX prefix: <http://lila-erc.eu/data/id/prefix/>
+
+#Lists the lemmas with at least one occurrence both in the CLaSSES corpus and in Caesar's "De bello gallico" (from the LASLA corpus) and reports the number of their occurrences in the two corpora concerned.
+
+SELECT ?lemmaLiLa ?lemmaLabel ?countCLaSSES ?countCaesarDBG
+WHERE {
+  {
+    SELECT ?lemmaLiLa ?lemmaLabel (count(?tokenClasses) as ?countCLaSSES)
+    WHERE {
+      <http://lila-erc.eu/data/corpora/CLaSSES/id/corpus> powla:hasSubDocument ?subDocLayer .
+      ?subDocLayer dc:title ?titlesubDocLayer .
+      ?docLayer powla:hasDocument ?subDocLayer .
+      ?lemmaLiLa a lila:Lemma ;
+                rdfs:label ?lemmaLabel .
+      ?tokenClasses lila:hasLemma ?lemmaLiLa ;
+                    powla:hasLayer ?docLayer ;
+                    rdfs:label ?tokenClassesLabel .
+    } 
+    GROUP BY ?lemmaLiLa ?lemmaLabel  
+  }
+  {
+    SELECT ?lemmaLiLa (count(?tokenCaesar) as ?countCaesarDBG)
+    WHERE {
+      ?tokenCaesar lila:hasLemma ?lemmaLiLa ;
+                   powla:hasLayer <http://lila-erc.eu/data/corpora/Lasla/id/corpus/CaesarBellum%20Gallicum/DocumentLayer> .
+    }
+    GROUP BY ?lemmaLiLa  
+  }
+}ORDER BY DESC(?countCaesarDBG)
