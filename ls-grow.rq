@@ -1,0 +1,19 @@
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+#Searches for all lemmas in LiLa LemmaBank whose definition in the LS dictionary includes the word "grow"
+
+
+SELECT ?lemma ?lc ?lemmaLabel ?definition WHERE {   
+  ?le ontolex:canonicalForm ?lemma ;
+      ontolex:evokes ?lc .
+  
+  ?lemma rdfs:label ?lemmaLabel.
+  <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry  ?le.
+  ?lc rdf:type ontolex:LexicalConcept;
+      <http://www.w3.org/2004/02/skos#definition> ?definition.
+   FILTER regex(?definition, "grow", "i")
+  ?lemma lila:hasPOS lila:verb
+}order by ?lemmaLabel ?lc 
