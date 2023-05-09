@@ -8,11 +8,11 @@ PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
 
 SELECT ?lemma ?lc ?lemmaLabel ?definition WHERE {   
   ?le ontolex:canonicalForm ?lemma ;
-      ontolex:evokes ?lc .
+      ontolex:sense ?lc .
   
   ?lemma rdfs:label ?lemmaLabel.
   <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry  ?le.
-  ?lc rdf:type ontolex:LexicalConcept;
+  ?lc rdf:type ontolex:LexicalSense;
       <http://www.w3.org/2004/02/skos#definition> ?definition.
    FILTER regex(?definition, "grow", "i")
   ?lemma lila:hasPOS lila:verb

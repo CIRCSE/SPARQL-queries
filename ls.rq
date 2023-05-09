@@ -13,7 +13,7 @@ WHERE {
   VALUES ?texts {<http://lila-erc.eu/data/corpora/CIRCSELatinLibrary/id/corpus/Confessiones/DocumentLayer> <http://lila-erc.eu/data/corpora/UDante/id/corpus/Egloghe/DocumentLayer>}
   <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry ?lexentry .
   ?lexentry ontolex:canonicalForm ?lemma ;
-            ontolex:evokes ?definition .
+            ontolex:sense ?definition .
   ?definition <http://www.w3.org/2004/02/skos#definition> ?definitionContent .
   ?lemma ontolex:writtenRep ?lemmaWrittenRep .
   FILTER regex(?definitionContent, "religion", "i")
