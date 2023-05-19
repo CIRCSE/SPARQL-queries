@@ -1,0 +1,27 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+
+# extract the lemmas of LASLA that are assigned a specific inflection class in PrinParLat  (e.g. the one of uiuo, uiuere, uixi, uictum)
+
+SELECT  ?lemma ?lemmaLabel WHERE {
+  VALUES ?corpus {
+    <http://lila-erc.eu/data/corpora/Lasla/id/corpus>
+  }
+  VALUES ?inflClass {
+    <http://lila-erc.eu/data/lexicalResources/prinparlat/id/inflection_class_96>
+  }
+  ?corpus powla:hasSubDocument ?doc.
+  ?docLayer powla:hasDocument ?doc.
+  ?token powla:hasLayer ?docLayer;
+         lila:hasLemma ?lemma;
+         powla:hasStringValue ?tokLabel.
+  ?lemma rdfs:label ?lemmaLabel.
+  <http://lila-erc.eu/data/lexicalResources/prinparlat/Lexicon> lime:entry ?flexeme.
+  ?flexeme ontolex:canonicalForm ?lemma;
+           <https://www.paralex-standard.org/paralex_ontology.xml#inflection_class> ?inflClass.
+} group by  ?lemma ?lemmaLabel

@@ -1,12 +1,12 @@
 [
     {
         "title": "Documents in LiLa",
-        "description": "Get all documents in LiLa knowledge base",
+        "description": "Gets all documents in LiLa knowledge base",
         "file": "lila_documents.rq"
     },
     {
         "title": "Lexical resources in LiLa",
-        "description": "Get all lexical resources in LiLa knowledge base",
+        "description": "Gets all lexical resources in LiLa knowledge base",
         "file": "lila_lexical.rq"
     },
     {
@@ -31,8 +31,18 @@
     },
 	{
         "title": "PrinParLat - Perfect forms of prefix verbs fron \"pono\"",
-        "description": "Extract all the perfect forms of all verbs that are directly derived from \"pono\" via prefixation according to WFL",
+        "description": "Extracts all the perfect forms of all verbs that are directly derived from \"pono\" via prefixation according to WFL",
         "file": "prinparlatWfl.rq"
+    },
+	{
+        "title": "PrinParLat - Lemmas inflected like \"uiuo\" in LASLA",
+        "description": "Extracts the lemmas of LASLA that are assigned a specific inflection class in PrinParLat  (e.g. the one of uiuo, uiuere, uixi, uictum)",
+        "file": "prinparlat_infl.rq"
+    },
+	{
+        "title": "PrinParLat - Lemmas per inflection class in LASLA (3rd conj.)",
+        "description": "Counts the number of distinct lemmas in LASLA for each inflection micro-class of verbs of the third conjugation",
+        "file": "prinparlat3th.rq"
     },
     {
         "title": "Dante Latin Loanwords",
@@ -46,11 +56,11 @@
     },
     {
         "title": "LASLA - \"Dico\" and \"Facio\" in De Vulgari Eloquentia and Seneca's \"De Otio\"",
-        "description": "Count the occurrences of forms of the lemmas 'dico' and 'facio' in Dante's \"De Vulgari Eloquentia\" and Seneca's \"De Otio\".",
+        "description": "Counts the occurrences of forms of the lemmas 'dico' and 'facio' in Dante's \"De Vulgari Eloquentia\" and Seneca's \"De Otio\".",
         "file": "laslaDicoFacio.rq"
     },
     {
-        "title": "LASLA - Get all documents in LASLA corpus",
+        "title": "LASLA - Gets all documents in LASLA corpus",
         "description": "List all the texts in the LASLA corpus",
         "file": "laslaDocument.rq"
     },
