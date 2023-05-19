@@ -61,7 +61,7 @@
     },
     {
         "title": "LASLA - Gets all documents in LASLA corpus",
-        "description": "List all the texts in the LASLA corpus",
+        "description": "Lists all the texts in the LASLA corpus",
         "file": "laslaDocument.rq"
     },
     {
