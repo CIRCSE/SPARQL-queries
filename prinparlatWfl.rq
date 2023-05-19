@@ -1,0 +1,28 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+
+# extract all the perfect forms of all verbs that are directly derived from "pono" via prefixation according to WFL
+
+SELECT ?formLabel  ?lemmaTargetLabel  ?form ?lemmaTarget  WHERE {
+  VALUES ?lemma {<http://lila-erc.eu/data/id/lemma/118414> }
+  VALUES ?cells {<http://lila-erc.eu/data/lexicalResources/prinparlat/id/cell_prf.act.ind.1.sg>  <http://lila-erc.eu/data/lexicalResources/prinparlat/id/cell_prf.act.ind.3.sg>  }
+  <http://lila-erc.eu/data/lexicalResources/WFL/Lexicon> lime:entry ?le.
+  ?le ontolex:canonicalForm ?lemma.
+  ?rule rdf:type <http://lila-erc.eu/ontologies/lila/wfl/Prefixation/VerbToVerb>.
+  ?rel <http://www.w3.org/ns/lemon/vartrans#source> ?le;
+       <http://lila-erc.eu/ontologies/lila/wfl/hasWordFormationRule> ?rule;
+       <http://www.w3.org/ns/lemon/vartrans#target> ?target .
+  ?target ontolex:canonicalForm ?lemmaTarget.
+  ?lemmaTarget rdfs:label ?lemmaTargetLabel.
+  ?flexeme ontolex:canonicalForm ?lemmaTarget.
+  ?form <http://lila-erc.eu/ontologies/prinparlat/flexeme> ?flexeme;
+        <https://www.paralex-standard.org/paralex_ontology.xml#cell> ?cells;
+        rdfs:label ?formLabel
+  
+  
+} group by ?form ?formLabel ?lemmaTarget ?lemmaTargetLabel 
+order by ?lemmaTargetLabel
