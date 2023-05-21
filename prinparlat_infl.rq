@@ -6,14 +6,14 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX powla: <http://purl.org/powla/powla.owl#>
 
-# extract the lemmas of LASLA that are assigned a specific inflection class in PrinParLat  (e.g. the one of uiuo, uiuere, uixi, uictum)
+# extract the lemmas of LASLA that are assigned a specific inflection class in PrinParLat (e.g. the one of "laedo": "laedere", "laesi", "laesum")
 
 SELECT  ?lemma ?lemmaLabel WHERE {
   VALUES ?corpus {
     <http://lila-erc.eu/data/corpora/Lasla/id/corpus>
   }
   VALUES ?inflClass {
-    <http://lila-erc.eu/data/lexicalResources/prinparlat/id/inflection_class_96>
+    <http://lila-erc.eu/data/lexicalResources/prinparlat/id/inflection_class_28>
   }
   ?corpus powla:hasSubDocument ?doc.
   ?docLayer powla:hasDocument ?doc.

@@ -30,13 +30,13 @@
         "file": "ls-grow.rq"
     },
 	{
-        "title": "PrinParLat - Perfect forms of prefix verbs fron \"pono\"",
+        "title": "PrinParLat - Perfect forms of prefixed verbs from \"pono\"",
         "description": "Extracts all the perfect forms of all verbs that are directly derived from \"pono\" via prefixation according to WFL",
         "file": "prinparlatWfl.rq"
     },
 	{
-        "title": "PrinParLat - Lemmas inflected like \"uiuo\" in LASLA",
-        "description": "Extracts the lemmas of LASLA that are assigned a specific inflection class in PrinParLat  (e.g. the one of uiuo, uiuere, uixi, uictum)",
+        "title": "PrinParLat - Lemmas inflected like \"laedo\" in LASLA",
+        "description": "Extracts the lemmas of LASLA that are assigned a specific inflection class in PrinParLat (e.g. the one of \"laedo\": \"laedere\", \"laesi\", \"laesum\")",
         "file": "prinparlat_infl.rq"
     },
 	{
