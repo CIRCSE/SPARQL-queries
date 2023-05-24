@@ -101,6 +101,11 @@
         "file": "SingIndDucoEo.rq"
     },
     {
+        "title": "ITTB - Conflictual objects",
+        "description": "Chains in the ITTB where a coomon or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of \"minimize, derogate, belittle, denigrate \" or \"fight, fight down, oppose, fight back, defend\", and is head of and adjective (in the lemmaBank) with positive polarity.",
+        "file": "ittbTreeObj.rq"
+    },
+    {
         "title": "UDante - Distinctive lemmas De Vulgari Eloquentia",
         "description": "Find all the lemmas that are used by Dante only in the \"De Vulgari Eloquentia\" and not in his other works",
         "file": "distinctivelammas-DVE.rq"
