@@ -102,7 +102,7 @@
     },
     {
         "title": "ITTB - Conflictual objects",
-        "description": "Chains in the ITTB where a coomon or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of \"minimize, derogate, belittle, denigrate \" or \"fight, fight down, oppose, fight back, defend\", and is head of and adjective (in the lemmaBank) with positive polarity.",
+        "description": "Chains in the ITTB where a common or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of \"minimize, derogate, belittle, denigrate \" or \"fight, fight down, oppose, fight back, defend\", and is head of an adjective (in the LemmaBank) with positive polarity.",
         "file": "ittbTreeObj.rq"
     },
     {
