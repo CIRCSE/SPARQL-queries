@@ -1,7 +1,3 @@
-###############################################
-# TITLE: Velez's Dictionary - definitions with "mulher" (woman)
-# DESCRIPTION: Searches for all lemmas in LiLa LemmaBank whose definition in the Velez's dictionary includes the word "mulher" (woman).
-###############################################
 PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
