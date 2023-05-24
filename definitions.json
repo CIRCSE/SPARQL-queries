@@ -31,7 +31,7 @@
     },
     {
         "title": "Velez's Dictionary - lemmas with the base \"dico\"",
-        "description": "Searches for entries in the Velez's dictionary whose lemmas have the lexical base \dico\".",
+        "description": "Searches for entries in the Velez's dictionary whose lemmas have the lexical base \"dico\".",
         "file": "Velez_base.rq"
     },
      {
