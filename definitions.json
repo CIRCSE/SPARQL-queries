@@ -29,6 +29,26 @@
         "description": "Searches for all lemmas in LiLa LemmaBank whose definition in the LS dictionary includes the word \"grow\".",
         "file": "ls-grow.rq"
     },
+    {
+        "title": "Velez's Dictionary - lemmas with the base \"dico\"",
+        "description": "Searches for entries in the Velez's dictionary whose lemmas have the lexical base \dico\".",
+        "file": "Velez_base.rq"
+    },
+     {
+        "title": "Velez's Dictionary - definitions with \"mulher\" (woman)",
+        "description": "Searches for all lemmas in LiLa LemmaBank whose definition in the Velez's dictionary includes the word \"mulher\" (woman).",
+        "file": "Velez_def.rq"
+    },
+       {
+        "title": "Velez's Dictionary - simple query",
+        "description": "Searches for entries in the Velez's dictionary whose lemmas have a certain written representation (e.g. \"sero\").",
+        "file": "Velez_entry.rq"
+    },
+       {
+        "title": "Velez's Dictionary - verbal lemmas in Catullus",
+        "description": "Searches for the occurrences of verbs in the Catullus' Liber that have entries in the Velez's dictionary.",
+        "file": "Velez_text.rq"
+    },
 	{
         "title": "PrinParLat - Perfect forms of prefixed verbs from \"pono\"",
         "description": "Extracts all the perfect forms of all verbs that are directly derived from \"pono\" via prefixation according to WFL",

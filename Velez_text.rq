@@ -1,0 +1,29 @@
+###############################################
+# TITLE: Velez's Dictionary - verbal lemmas in Catullus
+# DESCRIPTION: Searches for the occurrences of verbs in the Catullus' Liber that have entries in the Velez's dictionary.
+###############################################
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+
+# Searches for the occurrences of verbs in the Catullus' Liber that have entries in the Velez's dictionary.
+
+SELECT  ?entryLabel ?definition ?tokenlabel ?token
+WHERE {
+  <http://lila-erc.eu/data/lexicalResources/LatinPortuguese/Velez/Lexicon> lime:entry ?lexentry .
+  ?lexentry ontolex:canonicalForm ?lemma ;
+            rdfs:label ?entryLabel ;
+            ontolex:sense ?lexsense .
+  ?lexsense <http://www.w3.org/2004/02/skos#definition> ?definition .
+  ?lemma lila:hasPOS lila:verb .
+  #
+  ?token lila:hasLemma ?lemma ;
+         rdfs:label ?tokenlabel ;
+         powla:hasLayer <http://lila-erc.eu/data/corpora/Lasla/id/corpus/CatullusCatullus/DocumentLayer> .
+} order by ?lexentry
+
+# NOTES
+# For changing the Part of Speech, replace "verb" at line 16 with the desired one (for a list of accepted values, see <https://lila-erc.eu/ontologies/lila/POS>).
+# For changing the selected text, replace the text URI at line 20. (For a comprehensive list of accepted URIs, run the "Documents in LiLa" script available in the "Examples" button above.)
