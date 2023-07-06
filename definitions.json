@@ -50,6 +50,12 @@
         "file": "Velez_text.rq"
     },
 	{
+        "title": "Lexicon Bohemorum - Lemmas with \"natura\" not found in Lewis & Short",
+        "description": "Retrieves all lemmas whose entries in Lexicon Bohemorum include the word \"natura\" in their definition and do not occur also in the Lewis & Short dictionary, and then returns the number of their occurrences in the textual corpora linked to LiLa.",
+        "file": "query_natura_minus_LS.rq"
+    },
+
+	{
         "title": "PrinParLat - Perfect forms of prefixed verbs from \"pono\"",
         "description": "Extracts all the perfect forms of all verbs that are directly derived from \"pono\" via prefixation according to WFL",
         "file": "prinparlatWfl.rq"

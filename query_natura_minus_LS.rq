@@ -1,0 +1,39 @@
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+
+# Retrieves all lemmas whose entries in Lexicon Bohemorum include the word "natura" in their definition and do not occur also in the Lewis & Short dictionary, and then returns the number of their occurrences in the textual corpora linked to LiLa.
+
+Select ?lemma ?lemmaLabel (count(?lemma) as ?freq) ?corpusTitle where {
+  {
+    Select distinct ?lemma ?lemmaLabel where {
+      {
+        SELECT ?lemma WHERE {
+          <http://lila-erc.eu/data/lexicalResources/LexiconBohemorum/Lexicon> lime:entry ?lexentryBM .
+          ?lexentryBM ontolex:canonicalForm ?lemma ;
+                      ontolex:sense ?definitionBM .
+          ?definitionBM <http://www.w3.org/2004/02/skos#definition> ?definitionContentBM .
+          FILTER regex(?definitionContentBM, "natura", "i")
+        }
+      }
+      MINUS{
+        SELECT ?lemma WHERE {
+          <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry ?lexentry .
+          ?lexentry ontolex:canonicalForm ?lemma .
+        }
+      }
+      ?lemma rdfs:label ?lemmaLabel.
+    }
+  }
+  
+  ?token rdf:type powla:Terminal;
+         lila:hasLemma ?lemma .
+  ?token powla:hasLayer/powla:hasDocument/^powla:hasSubDocument ?copora .
+  ?copora dc:title ?corpusTitle.
+  
+} group by ?lemma ?lemmaLabel ?copora ?corpusTitle
+order by ?lemmaLabel
