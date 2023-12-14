@@ -19,6 +19,11 @@
         "description": "Lists all the corpora currently available in the LiLa Knowledge Base",
         "file": "corpora.rq"
     },
+	{
+        "title": "LiLa ontology - Inflection tagset",
+        "description": "Get inflection tagset of LiLa ontology",
+        "file": "flCat.rq"
+    },
     {
         "title": "Lewis & Short Dictionary",
         "description": "Occurrences of words whose LS definition contains \"religion\" in (a) \"Confessiones\" (Augustine) and (b) Latin works of Dante Alighieri",

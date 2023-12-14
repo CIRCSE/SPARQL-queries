@@ -1,0 +1,14 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+# Get inflection tagset of LiLa ontology
+
+SELECT * WHERE {
+  ?type rdfs:subClassOf lila:InflectionType.
+  ?inflClass rdfs:subClassOf ?type.
+  ?inflType rdf:type ?inflClass;
+            rdfs:label ?inflTypeLabel. 
+} 
+order by ?type ?inflClass ?inflType
+
