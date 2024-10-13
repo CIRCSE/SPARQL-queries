@@ -10,12 +10,12 @@ prefix marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
 prefix premon: <http://premon.fbk.eu/ontology/core#>
 prefix lv: <http://lila-erc.eu/ontologies/latinVallex/>
 
-# Find forms that have a specific synset in the currently revised portion of Latin WordNet (e.g. 00179311-v: "take out, take away") and a valency frame in Latin Vallex with specific functor (e.g., ADDR "addressee")
+# Find forms that have a specific synset in the currently revised portion of Latin WordNet (e.g. 00179456-v: "take out or remove") and a valency frame in Latin Vallex with specific functor (e.g., ADDR "addressee")
 SELECT ?form (count(?form) as ?count) ?docTitle ?prefixlabel
 WHERE {
   ?le ontolex:canonicalForm ?lemma ;
       ontolex:evokes ?frame ;
-      ontolex:evokes <http://wordnet-rdf.princeton.edu/wn30/00179311-v> .
+      ontolex:evokes <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/00179456-v> .
   ?frame premon:semRole ?SemRole .
   ?SemRole lv:functor <http://lila-erc.eu/ontologies/latinVallex/ADDR> .
   ?lemma lila:hasPrefix ?prefix .

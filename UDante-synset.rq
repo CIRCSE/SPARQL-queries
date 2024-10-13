@@ -7,7 +7,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
-# Find all the lemmas of the synset (to reign) http://wordnet-rdf.princeton.edu/wn30/02587375-v 
+# Find all the lemmas of the synset (to reign) http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/02593467-v
 SELECT ?lemma ?lemmaWrs ?docTitle
 WHERE {
   VALUES ?documentSummaCG {
@@ -18,7 +18,7 @@ WHERE {
         separator=", ") as ?lemmaWrs)
     WHERE {
       VALUES ?syn {
-        <http://wordnet-rdf.princeton.edu/wn30/02587375-v>
+        <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/02593467-v>
       } .
       {
         SELECT ?wnLemma ?syn 
