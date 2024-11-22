@@ -1,43 +1,19 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
-PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
-PREFIX powla: <http://purl.org/powla/powla.owl#>
-PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
-PREFIX marl: <http://www.gsi.dit.upm.es/ontologies/marl/ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX corpora: <http://lila-erc.eu/ontologies/lila_corpora/>
-PREFIX fn: <http://www.w3.org/2005/xpath-functions#>
-PREFIX ittb: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
-PREFIX lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
-prefix wn: <https://globalwordnet.github.io/schemas/wn#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
 
-# Retrieve all the lemmas belonging to a specific synset
-select ?lemma ?lab ?base ?syn where {
-  {
-    values ?syn {
-      <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/02593467-v> 
-    }
-    ?le ontolex:canonicalForm ?lemma ;
-        ontolex:evokes ?syn .
-    ?lemma rdfs:label ?lab ;
-           lila:hasBase ?base .
-  }
-  UNION
-  {
-    ?le ontolex:canonicalForm ?lemma ;
-        ontolex:evokes ?syn .
-    <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/02593467-v> wn:hypernym ?syn .
-    ?lemma rdfs:label ?lab ;
-           lila:hasBase ?base .
-  }
-  UNION 
-  {
-    ?le ontolex:canonicalForm ?l ;
-        ontolex:evokes ?syn_syn .
-    <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/02593467-v> wn:hypernym ?syn_syn .
-    ?l lila:hasBase ?base .
-    ?lemma a lila:Lemma ;
-       lila:hasPOS lila:verb;
-       lila:hasBase ?base ;
-       rdfs:label ?lab .
-  }
+#Selects those synsets in the Latin WordNet that are evoked by more than 50 lexical entries of the LWN
+
+SELECT ?synset ?synset_definition (COUNT(?synset) AS ?count)
+WHERE
+{
+  ?LWN_LE ontolex:evokes ?synset .
+  ?synset rdfs:label ?synset_label ;
+          skos:definition ?synset_definition .
+  FILTER regex(?synset_label, "^Wordnet Synset.*")
 }
+group by ?synset ?synset_definition
+having (count(?synset) > 40)
