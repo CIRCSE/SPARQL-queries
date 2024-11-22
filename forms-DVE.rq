@@ -10,7 +10,7 @@ PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
 SELECT ?lowcase_form (count(?form) as ?count)
 WHERE {
   VALUES ?LemmaValue {
-    'dico' 'facio' 
+    'dico'@la 'facio'@la 
   }
   ?lemma ontolex:writtenRep ?LemmaValue.
   ?token lila:hasLemma ?lemma ;
