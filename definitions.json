@@ -203,7 +203,7 @@
     },
 	{
         "title": "Latin Wordnet",
-        "description": "Selects those synsets in the Latin WordNet that are evoked by more than 50 lexical entries of the LWN",
+        "description": "Selects those synsets in the Latin WordNet that are evoked by more than 40 lexical entries of the LWN",
         "file": "latinwordnet_evoke50.rq"
     },
     {
