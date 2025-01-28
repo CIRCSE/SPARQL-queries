@@ -10,8 +10,9 @@ prefix lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix lila: <http://lila-erc.eu/ontologies/lila/>
 prefix UDSynFunction: <https://universaldependencies.org/u/dep/>
 prefix ITTBSynFunction: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
+prefix wn: <https://globalwordnet.github.io/schemas/wn#>
 
-# Chains in the ITTB where a common or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of "minimize, derogate, belittle, denigrate " or "fight, fight down, oppose, fight back, defend", and is head of an adjective (in the LemmaBank) with positive polarity.
+# Chains in the ITTB where a common or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of "cause to seem less serious; play down" or "fight against or resist strongly", and is head of an adjective (in the LemmaBank) with positive polarity.
 
 SELECT distinct ?tokenNoun ?tokenAdjLabel ?tokenNounLabel  ?tokenVerbLabel  ?wordnetSys
 WHERE {
@@ -28,7 +29,7 @@ WHERE {
     ITTBSynFunction:Obj
   }
   VALUES ?wordnetSys {
-    <http://wordnet-rdf.princeton.edu/wn30/01091427-v> <http://wordnet-rdf.princeton.edu/wn30/00864475-v>
+    <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/01093838-v> <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/00866139-v>
   }
   VALUES ?liber {
   <http://lila-erc.eu/data/corpora/ITTB/id/citationUnit/005.LB4.>
@@ -77,7 +78,5 @@ WHERE {
               ontolex:sense ?latinAffectusSense.
   ?latinAffectusSense marl:hasPolarity marl:Positive.
 }
-
-
 
 
