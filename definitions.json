@@ -34,6 +34,11 @@
         "description": "Searches for all lemmas in LiLa LemmaBank whose definition in the LS dictionary includes the word \"grow\".",
         "file": "ls-grow.rq"
     },
+	{
+        "title": "Lexicala - Occurrences of words defined with \"enlever\" in 4 corpora.",
+        "description": "Selects the lexical entry of the Lexicala Latin-French Dictionary whose definitions include the word \"enlever\" , selects the corresponding lemmas in the Lemma Bank that are formed with either the prefix \"de-\" or the prefix \"a(b)-\", searches for the tokens of the selected lemma in 4 corpora: CIRCSE Latin Library, LASLA, Fibonacci, UDante.",
+        "file": "query_lexicala.rq"
+    },
     {
         "title": "Velez's Dictionary - lemmas with the base \"dico\"",
         "description": "Searches for entries in the Velez's dictionary whose lemmas have the lexical base \"dico\".",
