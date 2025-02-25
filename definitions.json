@@ -36,7 +36,7 @@
     },
 	{
         "title": "Lexicala - Occurrences of words defined with \"enlever\" in 4 corpora.",
-        "description": "Selects the lexical entry of the Lexicala Latin-French Dictionary whose definitions include the word \"enlever\" , selects the corresponding lemmas in the Lemma Bank that are formed with either the prefix \"de-\" or the prefix \"a(b)-\", searches for the tokens of the selected lemma in 4 corpora: CIRCSE Latin Library, LASLA, Fibonacci, UDante.",
+        "description": "Selects the lexical entry of the Lexicala Latin-French Dictionary whose definitions include the word \"enlever\" , selects the corresponding lemmas in the Lemma Bank that are formed with either the prefix \"de-\" or the prefix \"a(b)-\", searches for the tokens of the selected lemma in 5 corpora: CIRCSE Latin Library, CLaSSES, LASLA, Fibonacci, UDante.",
         "file": "query_lexicala.rq"
     },
     {
