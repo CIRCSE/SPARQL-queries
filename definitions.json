@@ -40,6 +40,16 @@
         "file": "query_lexicala.rq"
     },
     {
+        "title": "Lexicala - Tokens of LASLA with no entry in the Lexicala Latin French Dictionary.",
+        "description": "Tokens of the Opera Latina corpus by LASLA that do not have a lexical entry in the Lexicala Latin-French dictionary",
+        "file": "lexicala_token.rq"
+    },
+    {
+        "title": "Lexicala - Lemmas of LASLA with no entry in the Lexicala Latin French Dictionary.",
+        "description": "Lemmas of the Opera Latina corpus by LASLA that do not have a lexical entry in the Lexicala Latin-French dictionary",
+        "file": "lexicala_lasla.rq"
+    },
+    {
         "title": "Velez's Dictionary - lemmas with the base \"dico\"",
         "description": "Searches for entries in the Velez's dictionary whose lemmas have the lexical base \"dico\".",
         "file": "Velez_base.rq"
