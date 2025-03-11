@@ -260,5 +260,10 @@
         "title": "Nsubj and subj of \"loquor\" in UDante and IT-TB",
         "description": "Given a specific lemma (e.g., \"loquor\"), it retrieves all the lemmas that are annotated as nsubj in Dante and subj IT-TB",
         "file": "UDante-syntax.rq"
+    },
+	{
+        "title": "Harmonized lemmatization by lemma (VERB) and connected hypolemmas (ADJ)",
+        "description": "Retrieves word types by harmonized lemmatization, i.e., regardless of whether a token is lemmatized to a lemma with PoS VERB, or to one of its hypolemmas with PoS ADJ",
+        "file": "Harmonized_lmz.rq"
     }
 ]
