@@ -1,0 +1,47 @@
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+
+#Retrieves word types by harmonized lemmatization, i.e., regardless of whether a token is lemmatized to a lemma with PoS VERB, or to one of its hypolemmas with PoS ADJ
+
+SELECT ?token_label ?lemma_label ?lemma ?pos_label (count(?token) as ?nToken) WHERE {
+  VALUES ?corpora {
+    <http://lila-erc.eu/data/corpora/CIRCSELatinLibrary/id/corpus> 
+    <http://lila-erc.eu/data/corpora/UDante/id/corpus> 
+    <http://lila-erc.eu/data/corpora/Lasla/id/corpus> 
+    <http://lila-erc.eu/data/corpora/CorpusFibonacci/id/corpus> 
+    <http://lila-erc.eu/data/corpora/CLaSSES/id/corpus>
+    <http://lila-erc.eu/data/corpora/ITTB/id/corpus>
+  }
+  {
+    ?pos rdf:type lila:Verb;
+         rdfs:label ?pos_label.
+    ?lemma rdf:type lila:Lemma ;
+           lila:hasPOS ?pos ;
+           rdfs:label ?lemma_label .
+    ?token lila:hasLemma ?lemma ;
+           rdf:type powla:Terminal ;
+           powla:hasLayer ?DocumentLayer ;
+           rdfs:label ?token_label .
+    ?DocumentLayer powla:hasDocument ?Document .
+    ?Document ^powla:hasSubDocument ?corpora .
+  }
+  UNION{
+    ?pos rdf:type lila:Adjective;
+         rdfs:label ?pos_label.
+    ?hypolemma rdf:type lila:Hypolemma ;
+               lila:hasPOS ?pos ;
+               rdfs:label ?lemma_label .
+    
+    ?hypolemma  lila:isHypolemma ?lemma.
+    
+    ?token lila:hasLemma ?hypolemma ;
+           rdf:type powla:Terminal ;
+           powla:hasLayer ?DocumentLayer ;
+           rdfs:label ?token_label .
+    ?DocumentLayer powla:hasDocument ?Document .
+    ?Document ^powla:hasSubDocument ?corpora .
+  }
+} group by ?token_label ?lemma  ?lemma_label ?pos_label
