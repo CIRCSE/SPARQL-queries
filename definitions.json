@@ -1,6 +1,6 @@
 [
     {
-        "title": "Corpora",
+        "title": "Corpora in LiLa",
         "description": "Lists all the corpora currently available in the LiLa Knowledge Base",
         "file": "corpora.rq"
     },
@@ -16,7 +16,7 @@
     },
 	{
         "title": "LiLa ontology - Inflection tagset",
-        "description": "Get inflection tagset of LiLa ontology",
+        "description": "Gets inflection tagset of LiLa ontology",
         "file": "flCat.rq"
     },
 	{
@@ -101,7 +101,7 @@
     },
     {
        "title": "LASLA - Distinctive lemmas Catullus",
-       "description": "Find all the lemmas that are used only by Catullus",
+       "description": "Finds all the lemmas that are used only by Catullus",
        "file": "laslaCatullo.rq"
    },
    {
@@ -121,7 +121,7 @@
    },
    {
        "title": "LASLA - Base \"patior\" in ITTB, UDante and Seneca",
-       "description": "Given a lexical base (patior), find all the lemmas of that lexical base in Dante, ITTB and Seneca",
+       "description": "Given a lexical base (patior), it finds all the lemmas of that lexical base in Dante, ITTB and Seneca",
        "file": "laslaPatior.rq"
    },
    {
@@ -141,7 +141,7 @@
    },
 	{
        "title": "Latin Vallex - Verbs with three functors",
-       "description": "Find all the Verb with a sysnet with three functors",
+       "description": "Finds all the Verb with a sysnet with three functors",
        "file": "ThreeFunctors.rq"
    },
 {
@@ -216,7 +216,7 @@
     },
     {
         "title": "UDante - Distinctive lemmas De Vulgari Eloquentia",
-        "description": "Find all the lemmas that are used by Dante only in the \"De Vulgari Eloquentia\" and not in his other works",
+        "description": "Finds all the lemmas that are used by Dante only in the \"De Vulgari Eloquentia\" and not in his other works",
         "file": "distinctivelammas-DVE.rq"
     },
     {
