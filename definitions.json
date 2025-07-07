@@ -90,13 +90,13 @@
         "file": "greek-etymology.rq"
     },
 	{
-        "title": "ITTB - Singular indicative forms from bases",
+        "title": "IT-TB - Singular indicative forms from bases",
         "description": "Searches for the occurrences of singular indicative forms of lemmas that belong to the lexical base of either \"duco\"  or \"eo\"",
         "file": "SingIndDucoEo.rq"
     },
     {
-        "title": "ITTB - Conflictual objects",
-        "description": "Chains in the ITTB where a common or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of \"cause to seem less serious; play down\" or \"fight against or resist strongly\", and is head of an adjective (in the LemmaBank) with positive polarity",
+        "title": "IT-TB - Conflictual objects",
+        "description": "Chains in the IT-TB where a common or proper noun depends as Obj in the PDT formalism and as obj in the UD formalism, on a verb belonging to either synset of \"cause to seem less serious; play down\" or \"fight against or resist strongly\", and is head of an adjective (in the LemmaBank) with positive polarity",
         "file": "ittbTreeObj.rq"
     },
     {
@@ -120,7 +120,7 @@
        "file": "laslaNegative.rq"
    },
    {
-       "title": "LASLA - Base \"patior\" in ITTB, UDante and Seneca",
+       "title": "LASLA - Base \"patior\" in IT-TB, UDante and Seneca",
        "description": "Given a lexical base (patior), it finds all the lemmas of that lexical base in Dante, ITTB and Seneca",
        "file": "laslaPatior.rq"
    },
