@@ -5,7 +5,7 @@ PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
 PREFIX frac: <http://www.w3.org/nl/lemon/frac#>
 PREFIX skos: <http://www.w3.org/2004/02/skos#>
 
-# searches for all attestations and sources in the Neulateinisches Wortliste (NLW)
+# searches for all attestations and sources in the Neulateinische Wortliste (NLW)
 
 SELECT DISTINCT ?source_label ?attestation_label
 WHERE {

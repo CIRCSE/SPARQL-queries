@@ -16,7 +16,7 @@ List of available queries (in alphabetical order):
 - lemmi-POS-suffix.rq: retrieves the lemmas in the Lemma Bank with a specific Part-of-Speech (e.g., NOUN) and a suffix;
 - lemmi-POS.rq: retrieves the lemmas in the lemmaBank with a specific Part-of-Speech (e.g., NOUN);
 - lexicons.rq: lists all the lexicons currently available in the LiLa Knowledge Base;
-- NLW-source-attestation.rq: retrieves all attestations and sources in the _Neulateinisches Wortliste_ (NLW)
+- NLW-source-attestation.rq: retrieves all attestations and sources in the _Neulateinische Wortliste_ (NLW)
 - protoItalic-Monarchia.rq: retrieves all the lemmas with a Proto-Italic reconstructed form in the "Monarchia" of Dante Alighieri;
 - sentiment-text.rq: performs lexicon-based sentiment analysis on each text of the Epistole by Dante Alighieri using LatinAffectus v2;
 - sentiment-paragraph.rq: performs lexicon-based sentiment analysis on each paragraph of the letters written by Dante Alighieri using LatinAffectus v2;

@@ -268,7 +268,7 @@
     },
 	{
         "title": "NLW - sources and attestations",
-        "description": "searches for all attestations and sources in the Neulateinisches Wortliste (NLW)",
+        "description": "searches for all attestations and sources in the Neulateinische Wortliste (NLW)",
         "file": "NLW_source_attestation.rq"
     }
 ]
