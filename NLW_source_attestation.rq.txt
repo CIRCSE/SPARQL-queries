@@ -1,0 +1,17 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX frac: <http://www.w3.org/nl/lemon/frac#>
+PREFIX skos: <http://www.w3.org/2004/02/skos#>
+
+# searches for all attestations and sources in the Neulateinisches Wortliste (NLW)
+
+SELECT DISTINCT ?source_label ?attestation_label
+WHERE {
+  ?sense rdf:type ontolex:LexicalSense ;
+frac:citation ?source .
+  ?source frac:makesAttestation ?attestation ;
+          rdfs:label ?source_label .
+  ?attestation skos:definition ?attestation_label .
+}
