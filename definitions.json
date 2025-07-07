@@ -265,5 +265,10 @@
         "title": "Harmonized lemmatization by lemma (VERB) and connected hypolemmas (ADJ)",
         "description": "Retrieves word types by harmonized lemmatization, i.e., regardless of whether a token is lemmatized to a lemma with PoS VERB, or to one of its hypolemmas with PoS ADJ",
         "file": "Harmonized_lmz.rq"
+    },
+	{
+        "title": "NLW - sources and attestations",
+        "description": "searches for all attestations and sources in the Neulateinisches Wortliste (NLW)",
+        "file": "NLW_source_attestation.rq"
     }
 ]
