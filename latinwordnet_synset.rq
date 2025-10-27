@@ -10,8 +10,8 @@ PREFIX ittb: <http://lila-erc.eu/data/corpora/ITTB/id/synFunction/>
 PREFIX lilacorpora: <http://lila-erc.eu/ontologies/lila_corpora/>
 prefix wn: <https://globalwordnet.github.io/schemas/wn#>
 
-# Retrieve all the lemmas belonging to a specific synset
-select ?lemma ?lab ?base ?syn where {
+# This query produces the list of lemmas (and, for each lemma, its lexical base) associated with a specific synset (or one of its hypernyms) in the version of Latin WordNet published in LiLa
+select distinct ?lemma ?lab ?base ?syn where {
   {
     values ?syn {
       <http://lila-erc.eu/data/lexicalResources/LatinWordNet/id/LexicalConcept/02593467-v> 

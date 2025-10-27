@@ -146,7 +146,7 @@
    },
 {
        "title": "Latin Wordnet - Lemmas and synsets",
-       "description": "Retrieves all the lemmas belonging to a specific synset",
+       "description": "This query produces the list of lemmas (and, for each lemma, its lexical base) associated with a specific synset (or one of its hypernyms) in the version of Latin WordNet published in LiLa",
        "file": "latinwordnet_synset.rq"
    },
 {
