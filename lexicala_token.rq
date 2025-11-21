@@ -21,6 +21,6 @@ SELECT ?token WHERE {
     ?token powla:hasLayer/powla:hasDocument ?docMinus.
     ?token lila:hasLemma ?lemmaMinus .
     ?le ontolex:canonicalForm ?lemmaMinus.
-    <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry  ?le.
+    <http://lila-erc.eu/data/lexicalResources/Lexicala/Lexicon/Lexicon> lime:entry  ?le.
   }
 } 

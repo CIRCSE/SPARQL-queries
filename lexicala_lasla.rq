@@ -20,6 +20,6 @@ SELECT ?lemma WHERE {
   
   minus {
     ?le ontolex:canonicalForm ?lemma.
-    <http://lila-erc.eu/data/lexicalResources/LewisShort/Lexicon> lime:entry  ?le.
+    <http://lila-erc.eu/data/lexicalResources/Lexicala/Lexicon/Lexicon> lime:entry  ?le.
   }
 }group by ?lemma
