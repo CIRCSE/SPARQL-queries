@@ -15,7 +15,7 @@ SELECT (GROUP_CONCAT(DISTINCT ?wr ;
     separator=", ") as ?wrs) ?lemma ?freq 
 WHERE {
   VALUES ?author {
-    <http://www.wikidata.org/entity/Q163079> 
+    <http://lila-erc.eu/data/authors/id/a46> 
   }
   {
     SELECT  ?lemma (count(?lemma) as ?freq)

@@ -36,7 +36,7 @@ WHERE {
        VALUES ?base {
         <http://lila-erc.eu/data/id/base/942>
       }
-      ?doc dcterms:creator <http://www.wikidata.org/entity/Q2054>.
+      ?doc dcterms:creator <http://lila-erc.eu/data/authors/id/a59>.
       ?sameBaseLemma lila:hasBase ?base.
       ?tokenSeneca rdf:type powla:Terminal;
                    lila:hasLemma ?sameBaseLemma .
