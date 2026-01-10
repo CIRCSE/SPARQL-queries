@@ -1,0 +1,27 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# Lists the works interlinked in the LiLa KB with a date of writing in the II century CE
+
+SELECT DISTINCT ?title ?creatorLabel (count(?tokenURI) as ?count)
+{
+  {
+    Select distinct ?creator ?creatorLabel where {
+      ?creator rdfs:label ?creatorLabel;
+               lila:endDate ?endDate .
+      filter ( ?endDate > "0100-01-01T00:00:00Z"^^xsd:dateTime ) filter (?endDate < "0200-01-01T00:00:00Z"^^xsd:dateTime )
+    }
+  }
+  ?tokenURI rdf:type powla:Terminal;
+            powla:hasLayer ?layer;
+            powla:hasStringValue ?stringValue .
+  ?layer powla:hasDocument ?document .
+  ?document dcterms:creator ?creator ;
+            dc:title ?title .
+  ?corpus powla:hasSubDocument ?document .
+}

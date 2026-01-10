@@ -1,0 +1,32 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX lilaCorpus: <http://lila-erc.eu/ontologies/lila_corpora/>
+prefix lila: <http://lila-erc.eu/ontologies/lila/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+# Lists the works interlinked in the LiLa KB by title, author, and date. 
+# For each work, the total number of tokens is reported. Those works that are not assigned a date of writing are not reported
+
+SELECT DISTINCT ?title ?creatorLabel ?startDates ?endDates (count(?tokenURI) as ?count)
+{
+  {
+    Select distinct ?creator ?creatorLabel (GROUP_CONCAT(DISTINCT ?startDate ;separator=", ") AS ?startDates) (GROUP_CONCAT(DISTINCT ?endDate ;separator=", ") AS ?endDates) where {
+      ?creator rdfs:label ?creatorLabel;
+               lila:startDate ?startDate;
+               lila:endDate ?endDate .
+    }group by ?creator ?creatorLabel
+  } 
+  ?tokenURI rdf:type powla:Terminal;
+            powla:hasLayer ?layer;
+            powla:hasStringValue ?stringValue .
+  ?layer powla:hasDocument ?document .
+  ?document dcterms:creator ?creator ;
+            dc:title ?title .
+  ?corpus powla:hasSubDocument ?document .
+}
+order by ?creatorLabel

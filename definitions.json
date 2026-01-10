@@ -49,6 +49,16 @@
         "description": "Given a lemma (e.g., \"occido\"), it retrieves all the tokens having that lemma in the works linked in the LiLa knowledge base",
         "file": "tokens.rq"
     },
+    {
+        "title": "Works by author, date and number of tokens",
+        "description": "Lists the works interlinked in the LiLa KB by title, author, and date. For each work, the total number of tokens is reported. Those works that are not assigned a date of writing are not reported",
+        "file": "tokensbyCentury.rq"
+    },
+    {
+        "title": "Works written in the II century CE",
+        "description": "Lists the works interlinked in the LiLa KB with a date of writing in the II century CE",
+        "file": "authorsDied2CE.rq"
+    },
 	{
         "title": "CLaSSES - Tokens with affix \"-ad\" ",
         "description": "Lists all the tokens of the various documents of the CLaSSES corpus that belong to a lemma featuring a specific affix in its derivational history (in the example: prefix n. 5 \"ad-\")",
