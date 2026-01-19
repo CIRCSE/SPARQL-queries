@@ -28,5 +28,5 @@ SELECT DISTINCT ?title ?creatorLabel ?startDates ?endDates (count(?tokenURI) as 
   ?document dcterms:creator ?creator ;
             dc:title ?title .
   ?corpus powla:hasSubDocument ?document .
-}
+} group by ?document ?title ?creator ?creatorLabel ?startDates ?endDates
 order by ?creatorLabel

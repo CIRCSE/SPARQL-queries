@@ -24,4 +24,4 @@ SELECT DISTINCT ?title ?creatorLabel (count(?tokenURI) as ?count)
   ?document dcterms:creator ?creator ;
             dc:title ?title .
   ?corpus powla:hasSubDocument ?document .
-}
+} group by ?document ?title ?creator ?creatorLabel
