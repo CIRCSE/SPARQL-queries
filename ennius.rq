@@ -1,0 +1,55 @@
+PREFIX lila: <http://lila-erc.eu/ontologies/lila/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX powla: <http://purl.org/powla/powla.owl#>
+PREFIX annales: <http://lila-erc.eu/data/corpora/QuintusEnniusOperaOmnia/id/corpus/Annales/>
+PREFIX pharsalia: <http://lila-erc.eu/data/corpora/CIRCSELatinLibrary/id/corpus/Pharsalia/>
+
+SELECT ?lemmaLabel ?tokensAnnales ?tokensAnnalesRelFreq ?tokensPharsalia ?tokensPharsaliaRelFreq ?DIFF
+WHERE {
+  # 1. Ottieni tutti i lemmi unici e le loro etichette da entrambi i corpora
+  {
+    SELECT DISTINCT ?lemma ?lemmaLabel
+    WHERE {
+      ?lemma rdfs:label ?lemmaLabel .
+      { ?tokenA powla:hasLayer annales:DocumentLayer ; lila:hasLemma ?lemma . }
+      UNION
+      { ?tokenP powla:hasLayer pharsalia:DocumentLayer ; lila:hasLemma ?lemma . }
+    }
+  }
+
+  # 2. Sottoquery per il conteggio in Annales (se assente, restituisce 0)
+  OPTIONAL {
+    SELECT ?lemma (COUNT(?tokenAnnales) AS ?cntAnnales)
+    WHERE {
+      ?tokenAnnales powla:hasLayer annales:DocumentLayer ;
+                    lila:hasLemma ?lemma .
+    }
+    GROUP BY ?lemma
+  }
+
+  # 3. Sottoquery per il conteggio in Pharsalia (se assente, restituisce 0)
+  OPTIONAL {
+    SELECT ?lemma (COUNT(?tokenPharsalia) AS ?cntPharsalia)
+    WHERE {
+      ?tokenPharsalia powla:hasLayer pharsalia:DocumentLayer ;
+                      lila:hasLemma ?lemma .
+    }
+    GROUP BY ?lemma
+  }
+
+  # Gestione dei valori non trovati (trasforma i valori vuoti/unbound in 0)
+  BIND(COALESCE(?cntAnnales, 0) AS ?tokensAnnales)
+  BIND(COALESCE(?cntPharsalia, 0) AS ?tokensPharsalia)
+  
+  # Calcolo della frequenza relativa percentuale per gli Annales
+  BIND((?tokensAnnales * 100.0) / 3485 AS ?tokensAnnalesRelFreq)
+  
+  # Calcolo della frequenza relativa percentuale per la Pharsalia
+  BIND((?tokensPharsalia * 100.0) / 53340 AS ?tokensPharsaliaRelFreq)
+  
+  # Calcolo della differenza tra frequenza relativa percentuale per la Pharsalia e per gli Annales (Pharsalia guida)
+  BIND(?tokensPharsaliaRelFreq - ?tokensAnnalesRelFreq AS ?DIFF)
+  
+}
+ORDER BY DESC (?DIFF)
