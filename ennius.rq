@@ -7,7 +7,7 @@ PREFIX pharsalia: <http://lila-erc.eu/data/corpora/CIRCSELatinLibrary/id/corpus/
 
 SELECT ?lemmaLabel ?tokensAnnales ?tokensAnnalesRelFreq ?tokensPharsalia ?tokensPharsaliaRelFreq ?DIFF
 WHERE {
-  # 1. Ottieni tutti i lemmi unici e le loro etichette da entrambi i corpora
+  # 1. Retrieves all unique lemmas and their corresponding labels from both corpora.
   {
     SELECT DISTINCT ?lemma ?lemmaLabel
     WHERE {
@@ -18,7 +18,7 @@ WHERE {
     }
   }
 
-  # 2. Sottoquery per il conteggio in Annales (se assente, restituisce 0)
+  # 2. Subquery for the lemma count in the Annales; returns 0 when the lemma does not occur.
   OPTIONAL {
     SELECT ?lemma (COUNT(?tokenAnnales) AS ?cntAnnales)
     WHERE {
@@ -28,7 +28,7 @@ WHERE {
     GROUP BY ?lemma
   }
 
-  # 3. Sottoquery per il conteggio in Pharsalia (se assente, restituisce 0)
+  # 3. Subquery for the lemma count in the Pharsalia; returns 0 when the lemma does not occur.
   OPTIONAL {
     SELECT ?lemma (COUNT(?tokenPharsalia) AS ?cntPharsalia)
     WHERE {
@@ -38,17 +38,17 @@ WHERE {
     GROUP BY ?lemma
   }
 
-  # Gestione dei valori non trovati (trasforma i valori vuoti/unbound in 0)
+  # Handling missing values (converts empty/unbound values to 0)
   BIND(COALESCE(?cntAnnales, 0) AS ?tokensAnnales)
   BIND(COALESCE(?cntPharsalia, 0) AS ?tokensPharsalia)
   
-  # Calcolo della frequenza relativa percentuale per gli Annales
+  # Computes the relative frequency of each lemma as a percentage of the total tokens in the Annales.
   BIND((?tokensAnnales * 100.0) / 3485 AS ?tokensAnnalesRelFreq)
   
-  # Calcolo della frequenza relativa percentuale per la Pharsalia
+  # Computes the relative frequency of each lemma as a percentage of the total tokens in the Pharsalia.
   BIND((?tokensPharsalia * 100.0) / 53340 AS ?tokensPharsaliaRelFreq)
   
-  # Calcolo della differenza tra frequenza relativa percentuale per la Pharsalia e per gli Annales (Pharsalia guida)
+  # Computes the difference in percentage relative frequency between the Pharsalia and the Annales (Pharsalia minus Annales).
   BIND(?tokensPharsaliaRelFreq - ?tokensAnnalesRelFreq AS ?DIFF)
   
 }
