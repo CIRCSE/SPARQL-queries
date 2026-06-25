@@ -5,7 +5,7 @@ PREFIX powla: <http://purl.org/powla/powla.owl#>
 PREFIX annales: <http://lila-erc.eu/data/corpora/QuintusEnniusOperaOmnia/id/corpus/Annales/>
 PREFIX pharsalia: <http://lila-erc.eu/data/corpora/CIRCSELatinLibrary/id/corpus/Pharsalia/>
 
-SELECT ?lemmaLabel ?tokensAnnales ?tokensAnnalesRelFreq ?tokensPharsalia ?tokensPharsaliaRelFreq ?DIFF
+SELECT ?lemma ?lemmaLabel ?tokensAnnales ?tokensAnnalesRelFreq ?tokensPharsalia ?tokensPharsaliaRelFreq ?DIFF
 WHERE {
   # 1. Retrieves all unique lemmas and their corresponding labels from both corpora.
   {
