@@ -1,0 +1,161 @@
+# ============================================================================
+# KWIC (Key Word In Context) concordance for a single LiLa lemma
+# ----------------------------------------------------------------------------
+# For every token linked to lemma <.../lemma/125279>, the query returns:
+#   - the token and its surface form (label)
+#   - the author, the author's name and the author's start/end dates
+#   - the title of the document containing the token
+#   - a context string: up to 20 preceding tokens + [token] + up to 20
+#     following tokens
+#
+# NOTE: sections B and C use Virtuoso's proprietary "OPTION (TRANSITIVE ...)"
+# syntax, so the query only runs on a Virtuoso endpoint (e.g. LiLa's). 
+# ============================================================================
+
+PREFIX dc:      <http://purl.org/dc/elements/1.1/>                 
+PREFIX lila:    <http://lila-erc.eu/ontologies/lila/>              
+PREFIX powla:   <http://purl.org/powla/powla.owl#>                 
+PREFIX lc:      <http://lila-erc.eu/ontologies/lila_corpora/>      
+PREFIX dcterms: <http://purl.org/dc/terms/>                       
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>            
+
+# Output columns. ?contesto is built by joining the left context, the
+# keyword in square brackets, and the right context. COALESCE replaces any
+# missing piece with "" so that CONCAT never returns an unbound value.
+SELECT ?token ?label_token ?autore ?autore_label ?titolo ?data_inizio ?data_fine
+       (CONCAT(COALESCE(?contesto_prima,""), " [", COALESCE(?label_token,""), "] ",
+               COALESCE(?contesto_dopo,"")) AS ?contesto)
+WHERE {
+  # Uncomment to restrict the results to a single author (here: a59).
+  #VALUES ?autore {<http://lila-erc.eu/data/authors/id/a59>}
+
+  # ===== A. Token, author, title, dates =====
+  # One row per (token, author) with document title and author dates.
+  {
+    SELECT ?token ?label_token ?autore ?autore_label
+           # A document may have several titles: SAMPLE keeps just one.
+           # (?titolo_lbl is never bound in this query, so in practice
+           # only dc:title is used.)
+           (SAMPLE(COALESCE(?titolo_dc, ?titolo_lbl)) AS ?titolo)
+           # Earliest start date and latest end date of the author;
+           # the regex strips the time part ("T...") from xsd:dateTime
+           # values, leaving only YYYY-MM-DD.
+           (REPLACE(STR(MIN(?inizio)), "T.*$", "") AS ?data_inizio)
+           (REPLACE(STR(MAX(?fine)),   "T.*$", "") AS ?data_fine)
+    WHERE {
+      # All tokens annotated with the target lemma.
+      ?token lila:hasLemma <http://lila-erc.eu/data/id/lemma/125279> .
+
+      # Surface form of the token (optional).
+      OPTIONAL { ?token rdfs:label ?label_token }
+
+      # Token -> document layer -> document it belongs to.
+      ?token powla:hasLayer ?layer .
+      ?layer a powla:DocumentLayer ;
+             powla:hasDocument ?doc .
+
+      # Title of the (sub)document, if present.
+      OPTIONAL { ?doc dc:title ?titolo_dc }
+
+      # Author info. The token's document may be a section of a larger work,
+      # so we climb the document hierarchy (zero or more hasSuperDocument
+      # steps, i.e. including ?doc itself) until we find a powla:Document
+      # with a dcterms:creator. Kept OPTIONAL so tokens from anonymous
+      # texts are not lost.
+      OPTIONAL {
+        ?doc powla:hasSuperDocument* ?docRoot .
+        ?docRoot a powla:Document ;
+                 dcterms:creator ?autoreUri .
+
+        OPTIONAL { ?autoreUri rdfs:label ?nome_autore }     # author name
+        OPTIONAL { ?autoreUri lila:startDate ?inizio }      # start of activity/life
+        OPTIONAL { ?autoreUri lila:endDate   ?fine }        # end of activity/life
+      }
+      # If the author cannot be found, use "Anonymous".
+      BIND(COALESCE(?nome_autore, "Anonymus") AS ?autore_label)
+      BIND(COALESCE(?autoreUri, <http://lila-erc.eu/data/authors/id/a1>) AS ?autore)
+    }
+
+    # Collapses the multiple rows produced by several titles/dates.
+    GROUP BY ?token ?label_token ?autore ?autore_label
+  }
+
+  # ===== B. Up to 20 PRECEDING tokens, concatenated =====
+  OPTIONAL {
+    # Step 3: join the labels of the preceding tokens into one string.
+    SELECT ?token (GROUP_CONCAT(?lp; SEPARATOR=" ") AS ?contesto_prima)
+    WHERE {
+      # Step 2: for each target token, list the preceding tokens with
+      # their distance (?dp) and label.
+      SELECT ?token ?lp WHERE {
+        ?token lila:hasLemma <http://lila-erc.eu/data/id/lemma/125279> .
+        {
+          # Step 1: define one "step backwards" in the text.
+          SELECT ?from ?prev WHERE {
+            # Case 1: ordinary step inside a unit (sentence/line),
+            # following powla:previous.
+            { ?from powla:previous ?prev }
+            UNION
+            # Case 2: ?from is the first token of its unit (it has no
+            # powla:previous), so jump to the last token of the previous
+            # unit. This lets the context cross sentence boundaries.
+            { ?u lc:first ?from ;
+                 powla:previous ?uPrev .
+              ?uPrev lc:last ?prev .
+              ?prev a powla:Terminal .
+              FILTER NOT EXISTS { ?from powla:previous ?any } }
+          }
+        }
+        # Virtuoso transitive closure over the step defined above:
+        #   t_in/t_out     : start and end variables of each step
+        #   t_distinct     : don't visit the same node twice
+        #   t_min/t_max    : between 1 and 20 steps
+        #   t_step(...)    : number of steps taken, bound to ?dp
+        OPTION (TRANSITIVE, t_in(?from), t_out(?prev), t_distinct,
+                t_min(1), t_max(20), t_step('step_no') AS ?dp) .
+        # Anchor the walk at the target token.
+        FILTER (?from = ?token)
+        ?prev rdfs:label ?lp .
+      }
+      # Farthest token first, so the left context reads in text order.
+      ORDER BY ?token DESC(?dp)
+    }
+    GROUP BY ?token
+  }
+
+  # ===== C. Up to 20 FOLLOWING tokens, concatenated =====
+  # Mirror image of section B, walking forwards with powla:next.
+  OPTIONAL {
+    SELECT ?token (GROUP_CONCAT(?ln; SEPARATOR=" ") AS ?contesto_dopo)
+    WHERE {
+      SELECT ?token ?ln WHERE {
+        ?token lila:hasLemma <http://lila-erc.eu/data/id/lemma/125279> .
+        {
+          # One "step forwards" in the text.
+          SELECT ?from ?nxt WHERE {
+            # Case 1: ordinary step inside a unit.
+            { ?from powla:next ?nxt }
+            UNION
+            # Case 2: ?from is the last token of its unit, so jump to the
+            # first token of the next unit.
+            { ?u lc:last ?from ;
+                 powla:next ?uNext .
+              ?uNext lc:first ?nxt .
+              ?nxt a powla:Terminal .
+              FILTER NOT EXISTS { ?from powla:next ?any } }
+          }
+        }
+        # Transitive closure: 1 to 20 steps, distance bound to ?dn.
+        OPTION (TRANSITIVE, t_in(?from), t_out(?nxt), t_distinct,
+                t_min(1), t_max(20), t_step('step_no') AS ?dn) .
+        FILTER (?from = ?token)
+        ?nxt rdfs:label ?ln .
+      }
+      # Nearest token first, so the right context reads in text order.
+      ORDER BY ?token ?dn
+    }
+    GROUP BY ?token
+  }
+}
+# Sort the concordance by author, then title, then token.
+ORDER BY ?autore_label ?titolo ?token

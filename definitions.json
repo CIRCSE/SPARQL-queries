@@ -59,7 +59,12 @@
         "description": "Lists the works interlinked in the LiLa KB with a date of writing in the II century CE",
         "file": "authorsDied2CE.rq"
     },
-	{
+    {
+        "title": "Lemma-based concordances on corpora",
+        "description": "Builds the KWIC (concordances) of the lemma \"species\" (NOUN) out of the corpora interlinked in LiLa. Window context: 20 tokens left and right. ",
+        "file": "kwic.rq"
+    },
+    {
         "title": "CLaSSES - Tokens with affix \"-ad\" ",
         "description": "Lists all the tokens of the various documents of the CLaSSES corpus that belong to a lemma featuring a specific affix in its derivational history (in the example: prefix n. 5 \"ad-\")",
         "file": "CLaSSES-tok-ad.rq"
