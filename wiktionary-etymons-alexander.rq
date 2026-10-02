@@ -1,0 +1,26 @@
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX lime: <http://www.w3.org/ns/lemon/lime#>
+PREFIX lemonEty: <http://lari-datasets.ilc.cnr.it/lemonEty#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Retrieve all the etymons (lemonEty:Etymon) of the LiLa lemma "Alexander",
+# using only the "English Wiktionary Latin Etymologies" lexical resource
+SELECT DISTINCT ?etymon ?etymonLabel
+WHERE {
+  # 1. Find the lexical entry whose canonical form is the LiLa lemma "Alexander"
+  #    (http://lila-erc.eu/data/id/lemma/10328)
+  ?entry ontolex:canonicalForm <http://lila-erc.eu/data/id/lemma/10328> .
+
+  # 2. Keep only entries belonging to the "English Wiktionary Latin Etymologies" lexicon
+  <http://lila-erc.eu/data/lexicalResources/englishWiktionaryLatinEtymologies/Lexicon>
+         lime:entry ?entry .
+
+  # 3. Follow the entry to its etymology and from there to its etymons
+  ?entry lemonEty:etymology ?etymology .
+  ?etymology lemonEty:etymon ?etymon .
+
+  # 4. Keep only resources typed as lemonEty:Etymon and get their label
+  ?etymon a lemonEty:Etymon ;
+          rdfs:label ?etymonLabel .
+}
+ORDER BY ?etymon

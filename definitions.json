@@ -84,6 +84,11 @@
         "description": "Lists the lemmas with at least one occurrence both in the CLaSSES corpus and in Caesar's \"De bello gallico\" (from the LASLA corpus) and reports the number of their occurrences in the two corpora concerned",
         "file": "CLaSSES-tok-inDBG.rq"
     },
+	    {
+        "title": "English Wiktionary Latin Etymologies - Etymons of \"Alexander\"",
+        "description": "Given a lemma (e.g., \"Alexander\"), it retrieves the URI and the label of all its etymons (lemonEty:Etymon) as recorded in the \"English Wiktionary Latin Etymologies\" lexical resource",
+        "file": "wiktionary-etymons-alexander.rq"
+    },
        {
         "title": "Etymological dictionary De Vaan - Proto-Italic lemmas",
         "description": "Retrieves all lemmas with a Proto-Italic reconstructed form",
